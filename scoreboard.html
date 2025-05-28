@@ -1,15 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTF Scoreboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        :root {
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   CTF Scoreboard
+  </title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js">
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&amp;family=Orbitron:wght@500;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   :root {
         --primary: #2e7d32;
         --primary-light: #4caf50;
         --primary-lighter: #81c784;
@@ -555,184 +557,415 @@
         90% { opacity: 0.5; }
         100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
     }
-    </style>
-</head>
-<body>
-    <div class="bg-elements">
-        <div class="bg-element" style="width: 300px; height: 300px; top: 10%; left: 5%; animation-delay: 0s;"></div>
-        <div class="bg-element" style="width: 400px; height: 400px; bottom: 15%; right: 10%; animation-delay: 3s;"></div>
-        <div class="bg-element" style="width: 200px; height: 200px; top: 50%; left: 30%; animation-delay: 6s;"></div>
+   table.scoreboard td a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        table.scoreboard td a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+  </style>
+ </head>
+ <body>
+  <div class="bg-elements">
+   <div class="bg-element" style="width: 300px; height: 300px; top: 10%; left: 5%; animation-delay: 0s;">
+   </div>
+   <div class="bg-element" style="width: 400px; height: 400px; bottom: 15%; right: 10%; animation-delay: 3s;">
+   </div>
+   <div class="bg-element" style="width: 200px; height: 200px; top: 50%; left: 30%; animation-delay: 6s;">
+   </div>
+  </div>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+   <div class="nav-container">
+    <a class="nav-logo" href="index.html">
+     CTF Arena
+    </a>
+    <div class="nav-links">
+     <a class="nav-link" href="index.html">
+      <i class="fas fa-home">
+      </i>
+      Home
+     </a>
+     <a class="nav-link" href="challenges.html">
+      <i class="fas fa-flag">
+      </i>
+      Challenges
+     </a>
+     <a class="nav-link active" href="scoreboard.html">
+      <i class="fas fa-trophy">
+      </i>
+      Scoreboard
+     </a>
     </div>
-    
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">CTF Arena</a>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
-                <a href="challenges.html" class="nav-link"><i class="fas fa-flag"></i> Challenges</a>
-                <a href="scoreboard.html" class="nav-link active"><i class="fas fa-trophy"></i> Scoreboard</a>
-            </div>
-        </div>
-    </nav>
-    
-    <div class="container">
-        <header>
-            <h1>Attack On Hash Function</h1>
-            <p class="subtitle">Discord CTF Dynamic Scoreboard - Real-time tracking of competitors' progress and rankings</p>
-        </header>
-        
-        <div class="chart-container">
-            <canvas id="pointsChart" width="800" height="400"></canvas>
-        </div>
-        
-        <table border="1" class="dataframe scoreboard">
-  <thead>
-    <tr style="text-align: right;">
-      <th>Rank</th>
-      <th>User</th>
-      <th>Points</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>🥇</td>
-      <td>DargoTamber</td>
-      <td>11100</td>
-    </tr>
-    <tr>
-      <td>🥈</td>
-      <td>suyashx_x</td>
-      <td>7500</td>
-    </tr>
-    <tr>
-      <td>🥉</td>
-      <td>sk1ll_1ssu3</td>
-      <td>6150</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>MrBender</td>
-      <td>5900</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>Oju D. Amatya</td>
-      <td>3600</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>Shrenav</td>
-      <td>3400</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>༒𝙰sʜᴡɪɴ༒</td>
-      <td>2800</td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>NikuHacks!</td>
-      <td>2650</td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td>$sudo</td>
-      <td>2300</td>
-    </tr>
-    <tr>
-      <td>10</td>
-      <td>MoonLight</td>
-      <td>1900</td>
-    </tr>
-    <tr>
-      <td>11</td>
-      <td>YoursTruly</td>
-      <td>1850</td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td>kinachaiyo</td>
-      <td>650</td>
-    </tr>
-    <tr>
-      <td>13</td>
-      <td>MauLana Rhoades</td>
-      <td>550</td>
-    </tr>
-    <tr>
-      <td>13</td>
-      <td>Iconic_Whisper</td>
-      <td>550</td>
-    </tr>
-    <tr>
-      <td>13</td>
-      <td>Nargiza Maharjan</td>
-      <td>550</td>
-    </tr>
-    <tr>
-      <td>16</td>
-      <td>luffy</td>
-      <td>450</td>
-    </tr>
-    <tr>
-      <td>17</td>
-      <td>10y</td>
-      <td>400</td>
-    </tr>
-    <tr>
-      <td>18</td>
-      <td>प्रणय</td>
-      <td>300</td>
-    </tr>
-    <tr>
-      <td>18</td>
-      <td>730100265633579008</td>
-      <td>300</td>
-    </tr>
-    <tr>
-      <td>18</td>
-      <td>404Ninjaaa</td>
-      <td>300</td>
-    </tr>
-    <tr>
-      <td>21</td>
-      <td>Abyss_Walker</td>
-      <td>250</td>
-    </tr>
-    <tr>
-      <td>22</td>
-      <td>Yodha</td>
-      <td>150</td>
-    </tr>
-    <tr>
-      <td>22</td>
-      <td>krazy</td>
-      <td>150</td>
-    </tr>
-    <tr>
-      <td>22</td>
-      <td>ahlai:3</td>
-      <td>150</td>
-    </tr>
-  </tbody>
-</table>
+   </div>
+  </nav>
+  <div class="container">
+   <header>
+    <h1>
+     Attack On Hash Function
+    </h1>
+    <p class="subtitle">
+     Discord CTF Dynamic Scoreboard - Real-time tracking of competitors' progress and rankings
+    </p>
+   </header>
+   <div class="chart-container">
+    <canvas height="400" id="pointsChart" width="800">
+    </canvas>
+   </div>
+   <table border="1" class="dataframe scoreboard">
+    <thead>
+     <tr style="text-align: right;">
+      <th>
+       Rank
+      </th>
+      <th>
+       User
+      </th>
+      <th>
+       Points
+      </th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr class="rank-1">
+      <td>
+       🥇
+      </td>
+      <td>
+       <a href="user/DargoTamber/challenges.html">
+        DargoTamber
+       </a>
+      </td>
+      <td>
+       11100
+      </td>
+     </tr>
+     <tr class="rank-2">
+      <td>
+       🥈
+      </td>
+      <td>
+       <a href="user/suyashx_x/challenges.html">
+        suyashx_x
+       </a>
+      </td>
+      <td>
+       7500
+      </td>
+     </tr>
+     <tr class="rank-3">
+      <td>
+       🥉
+      </td>
+      <td>
+       <a href="user/sk1ll_1ssu3/challenges.html">
+        sk1ll_1ssu3
+       </a>
+      </td>
+      <td>
+       6150
+      </td>
+     </tr>
+     <tr>
+      <td>
+       4
+      </td>
+      <td>
+       <a href="user/MrBender/challenges.html">
+        MrBender
+       </a>
+      </td>
+      <td>
+       5900
+      </td>
+     </tr>
+     <tr>
+      <td>
+       5
+      </td>
+      <td>
+       <a href="user/Oju D. Amatya/challenges.html">
+        Oju D. Amatya
+       </a>
+      </td>
+      <td>
+       3600
+      </td>
+     </tr>
+     <tr>
+      <td>
+       6
+      </td>
+      <td>
+       <a href="user/Shrenav/challenges.html">
+        Shrenav
+       </a>
+      </td>
+      <td>
+       3400
+      </td>
+     </tr>
+     <tr>
+      <td>
+       7
+      </td>
+      <td>
+       <a href="user/༒𝙰sʜᴡɪɴ༒/challenges.html">
+        ༒𝙰sʜᴡɪɴ༒
+       </a>
+      </td>
+      <td>
+       2800
+      </td>
+     </tr>
+     <tr>
+      <td>
+       8
+      </td>
+      <td>
+       <a href="user/NikuHacks!/challenges.html">
+        NikuHacks!
+       </a>
+      </td>
+      <td>
+       2650
+      </td>
+     </tr>
+     <tr>
+      <td>
+       9
+      </td>
+      <td>
+       <a href="user/$sudo/challenges.html">
+        $sudo
+       </a>
+      </td>
+      <td>
+       2300
+      </td>
+     </tr>
+     <tr>
+      <td>
+       10
+      </td>
+      <td>
+       <a href="user/MoonLight/challenges.html">
+        MoonLight
+       </a>
+      </td>
+      <td>
+       1900
+      </td>
+     </tr>
+     <tr>
+      <td>
+       11
+      </td>
+      <td>
+       <a href="user/YoursTruly/challenges.html">
+        YoursTruly
+       </a>
+      </td>
+      <td>
+       1850
+      </td>
+     </tr>
+     <tr>
+      <td>
+       12
+      </td>
+      <td>
+       <a href="user/kinachaiyo/challenges.html">
+        kinachaiyo
+       </a>
+      </td>
+      <td>
+       650
+      </td>
+     </tr>
+     <tr>
+      <td>
+       13
+      </td>
+      <td>
+       <a href="user/MauLana Rhoades/challenges.html">
+        MauLana Rhoades
+       </a>
+      </td>
+      <td>
+       550
+      </td>
+     </tr>
+     <tr>
+      <td>
+       14
+      </td>
+      <td>
+       <a href="user/Iconic_Whisper/challenges.html">
+        Iconic_Whisper
+       </a>
+      </td>
+      <td>
+       550
+      </td>
+     </tr>
+     <tr>
+      <td>
+       15
+      </td>
+      <td>
+       <a href="user/Nargiza Maharjan/challenges.html">
+        Nargiza Maharjan
+       </a>
+      </td>
+      <td>
+       550
+      </td>
+     </tr>
+     <tr>
+      <td>
+       16
+      </td>
+      <td>
+       <a href="user/luffy/challenges.html">
+        luffy
+       </a>
+      </td>
+      <td>
+       450
+      </td>
+     </tr>
+     <tr>
+      <td>
+       17
+      </td>
+      <td>
+       <a href="user/10y/challenges.html">
+        10y
+       </a>
+      </td>
+      <td>
+       400
+      </td>
+     </tr>
+     <tr>
+      <td>
+       18
+      </td>
+      <td>
+       <a href="user/प्रणय/challenges.html">
+        प्रणय
+       </a>
+      </td>
+      <td>
+       300
+      </td>
+     </tr>
+     <tr>
+      <td>
+       19
+      </td>
+      <td>
+       <a href="user/730100265633579008/challenges.html">
+        730100265633579008
+       </a>
+      </td>
+      <td>
+       300
+      </td>
+     </tr>
+     <tr>
+      <td>
+       20
+      </td>
+      <td>
+       <a href="user/404Ninjaaa/challenges.html">
+        404Ninjaaa
+       </a>
+      </td>
+      <td>
+       300
+      </td>
+     </tr>
+     <tr>
+      <td>
+       21
+      </td>
+      <td>
+       <a href="user/Abyss_Walker/challenges.html">
+        Abyss_Walker
+       </a>
+      </td>
+      <td>
+       250
+      </td>
+     </tr>
+     <tr>
+      <td>
+       22
+      </td>
+      <td>
+       <a href="user/Yodha/challenges.html">
+        Yodha
+       </a>
+      </td>
+      <td>
+       150
+      </td>
+     </tr>
+     <tr>
+      <td>
+       23
+      </td>
+      <td>
+       <a href="user/krazy/challenges.html">
+        krazy
+       </a>
+      </td>
+      <td>
+       150
+      </td>
+     </tr>
+     <tr>
+      <td>
+       24
+      </td>
+      <td>
+       <a href="user/ahlai_3/challenges.html">
+        ahlai:3
+       </a>
+      </td>
+      <td>
+       150
+      </td>
+     </tr>
+    </tbody>
+   </table>
+  </div>
+  <!-- Footer -->
+  <footer>
+   <div class="footer-content">
+    <div class="footer-links">
+     <a class="footer-link" href="#">
+      Terms
+     </a>
+     <a class="footer-link" href="#">
+      Privacy
+     </a>
+     <a class="footer-link" href="#">
+      Contact
+     </a>
     </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="#" class="footer-link">Terms</a>
-                <a href="#" class="footer-link">Privacy</a>
-                <a href="#" class="footer-link">Contact</a>
-            </div>
-            <p class="copyright">© 2025 Attack On Hash Function. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Add rank classes to table rows
+    <p class="copyright">
+     © 2025 Attack On Hash Function. All rights reserved.
+    </p>
+   </div>
+  </footer>
+  <script>
+   // Add rank classes to table rows
         document.addEventListener('DOMContentLoaded', function() {
             const rows = document.querySelectorAll('.scoreboard tbody tr');
             rows.forEach((row, index) => {
@@ -756,7 +989,7 @@
         const pointsChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['DargoTamber', 'suyashx_x', 'sk1ll_1ssu3', 'MrBender', 'Oju D. Amatya', 'Shrenav', '༒𝙰sʜᴡɪɴ༒', 'NikuHacks!', '$sudo', 'MoonLight'],
+                labels: ["DargoTamber", "suyashx_x", "sk1ll_1ssu3", "MrBender", "Oju D. Amatya", "Shrenav", "\u0f12\ud835\ude70s\u029c\u1d21\u026a\u0274\u0f12", "NikuHacks!", "$sudo", "MoonLight"],
                 datasets: [{
                     label: 'Points',
                     data: [11100, 7500, 6150, 5900, 3600, 3400, 2800, 2650, 2300, 1900],
@@ -882,8 +1115,6 @@
             if (range <= 10000) return 2000;
             return 5000;
         }
-    </script>
-
-    
-</body>
+  </script>
+ </body>
 </html>
