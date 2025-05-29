@@ -640,7 +640,7 @@
        </a>
       </td>
       <td>
-       9250
+       9100
       </td>
      </tr>
      <tr class="rank-2">
@@ -653,7 +653,7 @@
        </a>
       </td>
       <td>
-       6500
+       6350
       </td>
      </tr>
      <tr class="rank-3">
@@ -666,7 +666,7 @@
        </a>
       </td>
       <td>
-       5700
+       5600
       </td>
      </tr>
      <tr>
@@ -679,7 +679,7 @@
        </a>
       </td>
       <td>
-       4950
+       4900
       </td>
      </tr>
      <tr>
@@ -692,7 +692,7 @@
        </a>
       </td>
       <td>
-       2950
+       2900
       </td>
      </tr>
      <tr>
@@ -718,7 +718,7 @@
        </a>
       </td>
       <td>
-       2250
+       2200
       </td>
      </tr>
      <tr>
@@ -731,7 +731,7 @@
        </a>
       </td>
       <td>
-       2150
+       2100
       </td>
      </tr>
      <tr>
@@ -739,8 +739,8 @@
        9
       </td>
       <td>
-       <a href="user/$sudo/challenges.html">
-        $sudo
+       <a href="user/luffy/challenges.html">
+        luffy
        </a>
       </td>
       <td>
@@ -752,8 +752,8 @@
        10
       </td>
       <td>
-       <a href="user/luffy/challenges.html">
-        luffy
+       <a href="user/$sudo/challenges.html">
+        $sudo
        </a>
       </td>
       <td>
@@ -765,12 +765,12 @@
        11
       </td>
       <td>
-       <a href="user/MoonLight/challenges.html">
-        MoonLight
+       <a href="user/Iconic_Whisper/challenges.html">
+        Iconic_Whisper
        </a>
       </td>
       <td>
-       1450
+       1650
       </td>
      </tr>
      <tr>
@@ -778,8 +778,8 @@
        12
       </td>
       <td>
-       <a href="user/YoursTruly/challenges.html">
-        YoursTruly
+       <a href="user/MoonLight/challenges.html">
+        MoonLight
        </a>
       </td>
       <td>
@@ -789,6 +789,19 @@
      <tr>
       <td>
        13
+      </td>
+      <td>
+       <a href="user/YoursTruly/challenges.html">
+        YoursTruly
+       </a>
+      </td>
+      <td>
+       1350
+      </td>
+     </tr>
+     <tr>
+      <td>
+       14
       </td>
       <td>
        <a href="user/Dhiru Piru/challenges.html">
@@ -801,7 +814,7 @@
      </tr>
      <tr>
       <td>
-       14
+       15
       </td>
       <td>
        <a href="user/Yodha/challenges.html">
@@ -810,19 +823,6 @@
       </td>
       <td>
        1150
-      </td>
-     </tr>
-     <tr>
-      <td>
-       15
-      </td>
-      <td>
-       <a href="user/Iconic_Whisper/challenges.html">
-        Iconic_Whisper
-       </a>
-      </td>
-      <td>
-       1100
       </td>
      </tr>
      <tr>
@@ -1119,10 +1119,10 @@
         const pointsChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["DargoTamber", "suyashx_x", "p0tato", "MrBender", "Oju D. Amatya", "Shrenav", "\u0f12\ud835\ude70s\u029c\u1d21\u026a\u0274\u0f12", "$ ./0xN1kU_H4X_!", "$sudo", "luffy"],
+                labels: ["DargoTamber", "suyashx_x", "p0tato", "MrBender", "Oju D. Amatya", "Shrenav", "\u0f12\ud835\ude70s\u029c\u1d21\u026a\u0274\u0f12", "$ ./0xN1kU_H4X_!", "luffy", "$sudo"],
                 datasets: [{
                     label: 'Points',
-                    data: [9250, 6500, 5700, 4950, 2950, 2500, 2250, 2150, 1700, 1650],
+                    data: [9100, 6350, 5600, 4900, 2900, 2500, 2200, 2100, 1700, 1650],
                     backgroundColor: gradient,
                     borderColor: 'rgba(255, 255, 255, 0.3)',
                     borderWidth: 1,
@@ -1181,8 +1181,8 @@
                 scales: {
                     y: {
                         beginAtZero: false,
-                        min: getRoundedMin([9250, 6500, 5700, 4950, 2950, 2500, 2250, 2150, 1700, 1650]),
-                        max: getRoundedMax([9250, 6500, 5700, 4950, 2950, 2500, 2250, 2150, 1700, 1650]),
+                        min: getRoundedMin([9100, 6350, 5600, 4900, 2900, 2500, 2200, 2100, 1700, 1650]),
+                        max: getRoundedMax([9100, 6350, 5600, 4900, 2900, 2500, 2200, 2100, 1700, 1650]),
                         ticks: {
                             color: 'rgba(255, 255, 255, 0.7)',
                             font: {
@@ -1190,7 +1190,7 @@
                                 size: 12
                             },
                             padding: 10,
-                            stepSize: getStepSize([9250, 6500, 5700, 4950, 2950, 2500, 2250, 2150, 1700, 1650]),
+                            stepSize: getStepSize([9100, 6350, 5600, 4900, 2900, 2500, 2200, 2100, 1700, 1650]),
                             callback: function(value) {
                                 return value.toLocaleString();
                             }
