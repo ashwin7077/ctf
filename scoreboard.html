@@ -640,7 +640,7 @@
        </a>
       </td>
       <td>
-       8550
+       8400
       </td>
      </tr>
      <tr class="rank-2">
@@ -653,7 +653,7 @@
        </a>
       </td>
       <td>
-       5800
+       5700
       </td>
      </tr>
      <tr class="rank-3">
@@ -666,7 +666,7 @@
        </a>
       </td>
       <td>
-       5150
+       5050
       </td>
      </tr>
      <tr>
@@ -679,7 +679,7 @@
        </a>
       </td>
       <td>
-       4600
+       4550
       </td>
      </tr>
      <tr>
@@ -700,6 +700,19 @@
        6
       </td>
       <td>
+       <a href="user/$sudo/challenges.html">
+        $sudo
+       </a>
+      </td>
+      <td>
+       2550
+      </td>
+     </tr>
+     <tr>
+      <td>
+       7
+      </td>
+      <td>
        <a href="user/Shrenav/challenges.html">
         Shrenav
        </a>
@@ -710,7 +723,7 @@
      </tr>
      <tr>
       <td>
-       7
+       8
       </td>
       <td>
        <a href="user/༒𝙰sʜᴡɪɴ༒/challenges.html">
@@ -723,7 +736,7 @@
      </tr>
      <tr>
       <td>
-       8
+       9
       </td>
       <td>
        <a href="user/0xN1kU_H4X_!/challenges.html">
@@ -731,12 +744,12 @@
        </a>
       </td>
       <td>
-       2150
+       2100
       </td>
      </tr>
      <tr>
       <td>
-       9
+       10
       </td>
       <td>
        <a href="user/luffy/challenges.html">
@@ -749,7 +762,7 @@
      </tr>
      <tr>
       <td>
-       10
+       11
       </td>
       <td>
        <a href="user/Iconic_Whisper/challenges.html">
@@ -757,20 +770,7 @@
        </a>
       </td>
       <td>
-       1550
-      </td>
-     </tr>
-     <tr>
-      <td>
-       11
-      </td>
-      <td>
-       <a href="user/$sudo/challenges.html">
-        $sudo
-       </a>
-      </td>
-      <td>
-       1550
+       1500
       </td>
      </tr>
      <tr>
@@ -1262,10 +1262,10 @@
         const pointsChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["DargoTamber", "kharayo1x", "p0tato", "MrBender", "Oju D. Amatya", "Shrenav", "\u0f12\ud835\ude70s\u029c\u1d21\u026a\u0274\u0f12", "0xN1kU_H4X_!", "luffy", "Iconic_Whisper"],
+                labels: ["DargoTamber", "kharayo1x", "p0tato", "MrBender", "Oju D. Amatya", "$sudo", "Shrenav", "\u0f12\ud835\ude70s\u029c\u1d21\u026a\u0274\u0f12", "0xN1kU_H4X_!", "luffy"],
                 datasets: [{
                     label: 'Points',
-                    data: [8550, 5800, 5150, 4600, 2900, 2250, 2200, 2150, 1600, 1550],
+                    data: [8400, 5700, 5050, 4550, 2900, 2550, 2250, 2200, 2100, 1600],
                     backgroundColor: gradient,
                     borderColor: 'rgba(255, 255, 255, 0.3)',
                     borderWidth: 1,
@@ -1324,8 +1324,8 @@
                 scales: {
                     y: {
                         beginAtZero: false,
-                        min: getRoundedMin([8550, 5800, 5150, 4600, 2900, 2250, 2200, 2150, 1600, 1550]),
-                        max: getRoundedMax([8550, 5800, 5150, 4600, 2900, 2250, 2200, 2150, 1600, 1550]),
+                        min: getRoundedMin([8400, 5700, 5050, 4550, 2900, 2550, 2250, 2200, 2100, 1600]),
+                        max: getRoundedMax([8400, 5700, 5050, 4550, 2900, 2550, 2250, 2200, 2100, 1600]),
                         ticks: {
                             color: 'rgba(255, 255, 255, 0.7)',
                             font: {
@@ -1333,7 +1333,7 @@
                                 size: 12
                             },
                             padding: 10,
-                            stepSize: getStepSize([8550, 5800, 5150, 4600, 2900, 2250, 2200, 2150, 1600, 1550]),
+                            stepSize: getStepSize([8400, 5700, 5050, 4550, 2900, 2550, 2250, 2200, 2100, 1600]),
                             callback: function(value) {
                                 return value.toLocaleString();
                             }
