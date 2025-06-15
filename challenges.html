@@ -3921,6 +3921,150 @@
       <script>
        document.querySelector(`.category[id="cat-forensic"]`).style.display = "block";
       </script>
+      <div class="challenge" id="packet_whisper" style="--accent-color: hsl(342, 80%, 60%)">
+       <div class="challenge-header" onclick="toggleChallengeDetails('packet_whisper')">
+        <h3>
+         Packet Whisper
+        </h3>
+        <div class="challenge-meta">
+         <div class="meta-item">
+          <i>
+           ⚡
+          </i>
+          <span class="difficulty-hard">
+           Hard
+          </span>
+         </div>
+        </div>
+        <i class="toggle-icon">
+         ▼
+        </i>
+       </div>
+       <div class="challenge-details" id="details-packet_whisper">
+        <div class="challenge-description">
+         <p>
+          <strong>
+           Description:
+          </strong>
+          Some say machines speak in binary.
+          <br/>
+          Others say they whisper in patterns.
+          <br/>
+          The data seems random, but patterns don’t lie.
+          <br/>
+          Trace the flow. Extract the message.
+          <br/>
+          <br/>
+          Can you hear what the silence between packets is saying? I am repeating myself again and again and again.
+          <br/>
+          <b>
+           Flag should be in uppercase
+          </b>
+         </p>
+         <p>
+          <strong>
+           Attachment:
+          </strong>
+          <a href="https://drive.google.com/file/d/1w3IzY0Z7GnPN83enyBP2cFSv8NwWEQcd/view?usp=sharing" target="_blank">
+           Download
+          </a>
+         </p>
+         <div class="meta-item">
+          <i>
+           🔑
+          </i>
+          <span class="tooltip">
+           Flag Format
+           <span class="tooltiptext">
+            The flag must match this pattern exactly
+           </span>
+          </span>
+          :
+          <code>
+           AOHF{}
+          </code>
+         </div>
+        </div>
+        <div class="flag-form">
+         <input autocomplete="off" class="flag-input" id="input-packet_whisper" placeholder="Enter your flag here..." type="text"/>
+         <button class="flag-submit" onclick="checkFlag_packet_whisper()">
+          <i>
+           🔒
+          </i>
+          Submit Flag
+         </button>
+         <div class="result" id="result-packet_whisper">
+         </div>
+        </div>
+       </div>
+      </div>
+      <script>
+       async function checkFlag_packet_whisper() {
+            const input = document.getElementById("input-packet_whisper").value.trim();
+            const resultElement = document.getElementById("result-packet_whisper");
+            const challengeCard = document.getElementById("packet_whisper");
+            
+            // Clear previous result and show loading state
+            resultElement.className = "result loading show";
+            resultElement.textContent = "🔐 Verifying your flag...";
+            
+            // Simulate network delay for realism
+            await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 700));
+            
+            try {
+                // Client-side SHA-256 hashing
+                const msgBuffer = new TextEncoder().encode(input);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+                if (hashHex === "4850b021a9dd98f31e63f90289306e9b32b61d50b7af3e186664dbd74a515622") {
+                    // Correct flag
+                    resultElement.className = "result success show";
+                    resultElement.textContent = "✅ Correct! Flag accepted!";
+                    
+                    // Celebration effects
+                    challengeCard.style.border = "1px solid var(--success)";
+                    challengeCard.style.boxShadow = "0 0 20px rgba(0, 204, 102, 0.5)";
+                    challengeCard.style.animation = "pulse 1.5s infinite";
+                    
+                    // Create confetti explosion
+                    createConfetti();
+                    
+                    // Add success badge to challenge
+                    const successBadge = document.createElement('div');
+                    successBadge.innerHTML = '<div style="position: absolute; top: 10px; right: 10px; background: var(--success); color: black; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">SOLVED</div>';
+                    challengeCard.appendChild(successBadge);
+                    
+                    // Disable input after success
+                    document.getElementById("input-packet_whisper").disabled = true;
+                    document.querySelector(`button[onclick="checkFlag_packet_whisper()"]`).disabled = true;
+                    
+                    // Stop pulse animation after 3 seconds
+                    setTimeout(() => {
+                        challengeCard.style.animation = "";
+                    }, 3000);
+                } else {
+                    // Incorrect flag
+                    resultElement.className = "result error show";
+                    resultElement.textContent = "❌ Incorrect flag! Try again.";
+                    
+                    // Shake animation
+                    challengeCard.style.animation = "shake 0.5s";
+                    setTimeout(() => {
+                        challengeCard.style.animation = "";
+                    }, 500);
+                }
+            } catch (error) {
+                resultElement.className = "result error show";
+                resultElement.textContent = "⚠️ Error verifying flag. Please try again.";
+                console.error("Flag verification error:", error);
+            }
+        }
+      </script>
+      <script>
+       document.querySelector(`.category[id="cat-forensic"]`).style.display = "block";
+      </script>
       <!-- forensic-challenges-here -->
      </div>
     </section>
@@ -3976,15 +4120,16 @@
          </div>
         </div>
         <div class="flag-form">
-         <input autocomplete="off" class="flag-input" id="input-first_xor" placeholder="Enter your flag here..." type="text"/>
-         <button class="flag-submit" onclick="checkFlag_first_xor()">
-          <i>
-           🔒
-          </i>
-          Submit Flag
-         </button>
-         <div class="result" id="result-first_xor">
-         </div>
+         <input autocomplete="off" class="flag-input" id="input-first_xor" placeholder="Enter your flag here..." type="text">
+          <button class="flag-submit" onclick="checkFlag_first_xor()">
+           <i>
+            🔒
+           </i>
+           Submit Flag
+          </button>
+          <div class="result" id="result-first_xor">
+          </div>
+         </input>
         </div>
        </div>
       </div>
@@ -4084,12 +4229,15 @@
            Description:
           </strong>
           1100 1111 1110 1111 1100 1111 1100 1010 1001 1110 1011 1010 1010 1001 1110 1011 1001 1100 1100
-          <br/>
-          To prevent industrial espionage, the development team devised their own secret method of communication. By using a custom encoding scheme, they ensured that only insiders could decipher their messages. However, one of their transmissions has been intercepted. Your task is to decode it and reconstruct the flag before it falls into the wrong hands. The flag is basecally in the attachement. To make a complete flag, you must put the result in discordctf{}.
-          <br/>
-          Hint:
-          <br/>
-          Binary is also known as Base 2. This means it is composed of only 0's and 1's. What happen if binary has base 3, base 4 , base 5 and so on.....
+          <br>
+           To prevent industrial espionage, the development team devised their own secret method of communication. By using a custom encoding scheme, they ensured that only insiders could decipher their messages. However, one of their transmissions has been intercepted. Your task is to decode it and reconstruct the flag before it falls into the wrong hands. The flag is basecally in the attachement. To make a complete flag, you must put the result in discordctf{}.
+           <br>
+            Hint:
+            <br>
+             Binary is also known as Base 2. This means it is composed of only 0's and 1's. What happen if binary has base 3, base 4 , base 5 and so on.....
+            </br>
+           </br>
+          </br>
          </p>
          <p>
           <strong>
@@ -4224,10 +4372,12 @@
            Description:
           </strong>
           0e0b213f26041e480b26217f27342e175d0e070a3c5b103e2526217f27342e175d0e077e263451150104
-          <br/>
-          Data is encrypted. Find the key and get the flag.
-          <br/>
-          1 minute , Do you know the basic concept of XOR ??
+          <br>
+           Data is encrypted. Find the key and get the flag.
+           <br>
+            1 minute , Do you know the basic concept of XOR ??
+           </br>
+          </br>
          </p>
          <div class="meta-item">
           <i>
@@ -4488,10 +4638,11 @@
            Description:
           </strong>
           A football player got injured during the match. The referee immediately made a substitude, bringing Lionel Messi onto the field. His presence instantly shifted the frequency of play, turning the game in a new direction.
-          <br/>
-          <b>
-           Note: Flag text should be in lowercase.
-          </b>
+          <br>
+           <b>
+            Note: Flag text should be in lowercase.
+           </b>
+          </br>
          </p>
          <p>
           <strong>
