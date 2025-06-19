@@ -4068,6 +4068,139 @@
       <script>
        document.querySelector(`.category[id="cat-forensic"]`).style.display = "block";
       </script>
+      <div class="challenge" id="phantom_pings" style="--accent-color: hsl(126, 80%, 60%)">
+       <div class="challenge-header" onclick="toggleChallengeDetails('phantom_pings')">
+        <h3>
+         Phantom Pings
+        </h3>
+        <div class="challenge-meta">
+         <div class="meta-item">
+          <i>
+           ⚡
+          </i>
+          <span class="difficulty-medium">
+           Medium
+          </span>
+         </div>
+        </div>
+        <i class="toggle-icon">
+         ▼
+        </i>
+       </div>
+       <div class="challenge-details" id="details-phantom_pings">
+        <div class="challenge-description">
+         <p>
+          <strong>
+           Description:
+          </strong>
+          You hear a knock. You open the door. But no one was ever there.
+          <br/>
+          Some ghosts don’t wait to be summoned… they reply first.
+         </p>
+         <p>
+          <strong>
+           Attachment:
+          </strong>
+          <a href="https://drive.google.com/file/d/1soz7eORJLJV83GaaTOn0q-WygeX-y8-L/view?usp=sharing" target="_blank">
+           Download
+          </a>
+         </p>
+         <div class="meta-item">
+          <i>
+           🔑
+          </i>
+          <span class="tooltip">
+           Flag Format
+           <span class="tooltiptext">
+            The flag must match this pattern exactly
+           </span>
+          </span>
+          :
+          <code>
+           AOHF{}
+          </code>
+         </div>
+        </div>
+        <div class="flag-form">
+         <input autocomplete="off" class="flag-input" id="input-phantom_pings" placeholder="Enter your flag here..." type="text"/>
+         <button class="flag-submit" onclick="checkFlag_phantom_pings()">
+          <i>
+           🔒
+          </i>
+          Submit Flag
+         </button>
+         <div class="result" id="result-phantom_pings">
+         </div>
+        </div>
+       </div>
+      </div>
+      <script>
+       async function checkFlag_phantom_pings() {
+            const input = document.getElementById("input-phantom_pings").value.trim();
+            const resultElement = document.getElementById("result-phantom_pings");
+            const challengeCard = document.getElementById("phantom_pings");
+            
+            // Clear previous result and show loading state
+            resultElement.className = "result loading show";
+            resultElement.textContent = "🔐 Verifying your flag...";
+            
+            // Simulate network delay for realism
+            await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 700));
+            
+            try {
+                // Client-side SHA-256 hashing
+                const msgBuffer = new TextEncoder().encode(input);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+                if (hashHex === "8fb7308f4670b49960ebea326fc99675b239c21e07af2fbac42b59ed112849b4") {
+                    // Correct flag
+                    resultElement.className = "result success show";
+                    resultElement.textContent = "✅ Correct! Flag accepted!";
+                    
+                    // Celebration effects
+                    challengeCard.style.border = "1px solid var(--success)";
+                    challengeCard.style.boxShadow = "0 0 20px rgba(0, 204, 102, 0.5)";
+                    challengeCard.style.animation = "pulse 1.5s infinite";
+                    
+                    // Create confetti explosion
+                    createConfetti();
+                    
+                    // Add success badge to challenge
+                    const successBadge = document.createElement('div');
+                    successBadge.innerHTML = '<div style="position: absolute; top: 10px; right: 10px; background: var(--success); color: black; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">SOLVED</div>';
+                    challengeCard.appendChild(successBadge);
+                    
+                    // Disable input after success
+                    document.getElementById("input-phantom_pings").disabled = true;
+                    document.querySelector(`button[onclick="checkFlag_phantom_pings()"]`).disabled = true;
+                    
+                    // Stop pulse animation after 3 seconds
+                    setTimeout(() => {
+                        challengeCard.style.animation = "";
+                    }, 3000);
+                } else {
+                    // Incorrect flag
+                    resultElement.className = "result error show";
+                    resultElement.textContent = "❌ Incorrect flag! Try again.";
+                    
+                    // Shake animation
+                    challengeCard.style.animation = "shake 0.5s";
+                    setTimeout(() => {
+                        challengeCard.style.animation = "";
+                    }, 500);
+                }
+            } catch (error) {
+                resultElement.className = "result error show";
+                resultElement.textContent = "⚠️ Error verifying flag. Please try again.";
+                console.error("Flag verification error:", error);
+            }
+        }
+      </script>
+      <script>
+       document.querySelector(`.category[id="cat-forensic"]`).style.display = "block";
+      </script>
       <!-- forensic-challenges-here -->
      </div>
     </section>
@@ -4123,15 +4256,16 @@
          </div>
         </div>
         <div class="flag-form">
-         <input autocomplete="off" class="flag-input" id="input-first_xor" placeholder="Enter your flag here..." type="text"/>
-         <button class="flag-submit" onclick="checkFlag_first_xor()">
-          <i>
-           🔒
-          </i>
-          Submit Flag
-         </button>
-         <div class="result" id="result-first_xor">
-         </div>
+         <input autocomplete="off" class="flag-input" id="input-first_xor" placeholder="Enter your flag here..." type="text">
+          <button class="flag-submit" onclick="checkFlag_first_xor()">
+           <i>
+            🔒
+           </i>
+           Submit Flag
+          </button>
+          <div class="result" id="result-first_xor">
+          </div>
+         </input>
         </div>
        </div>
       </div>
@@ -4231,12 +4365,13 @@
            Description:
           </strong>
           1100 1111 1110 1111 1100 1111 1100 1010 1001 1110 1011 1010 1010 1001 1110 1011 1001 1100 1100
-          <br/>
-          To prevent industrial espionage, the development team devised their own secret method of communication. By using a custom encoding scheme, they ensured that only insiders could decipher their messages. However, one of their transmissions has been intercepted. Your task is to decode it and reconstruct the flag before it falls into the wrong hands. The flag is basecally in the attachement. To make a complete flag, you must put the result in discordctf{}.
-          <br/>
-          Hint:
-          <br/>
-          Binary is also known as Base 2. This means it is composed of only 0's and 1's. What happen if binary has base 3, base 4 , base 5 and so on.....
+          <br>
+           To prevent industrial espionage, the development team devised their own secret method of communication. By using a custom encoding scheme, they ensured that only insiders could decipher their messages. However, one of their transmissions has been intercepted. Your task is to decode it and reconstruct the flag before it falls into the wrong hands. The flag is basecally in the attachement. To make a complete flag, you must put the result in discordctf{}.
+           <br/>
+           Hint:
+           <br/>
+           Binary is also known as Base 2. This means it is composed of only 0's and 1's. What happen if binary has base 3, base 4 , base 5 and so on.....
+          </br>
          </p>
          <p>
           <strong>
