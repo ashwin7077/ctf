@@ -848,7 +848,11 @@
           <strong>
            Description:
           </strong>
-          Can you feel the flag. print " [ len(intro.txt) ]" ;
+          Can you feel the flag.
+          <br/>
+          <code>
+           print " [ len(intro.txt) ]" ;
+          </code>
          </p>
          <p>
           <strong>
@@ -1251,8 +1255,21 @@
            Description:
           </strong>
           I need some kind of rotation.
-          <br/>
-          bgqampbardy5]2k]hs3r]af1ai5le]2ar5t1]a5d]nj2wcp]f_f_f_{
+          <br>
+           <code id="rot1" onclick="navigator.clipboard.writeText(this.innerText); showMsgRot1()" style="cursor:pointer;">
+            bgqampbardy5]2k]hs3r]af1ai5le]2ar5t1]a5d]nj2wcp]f_f_f_{
+           </code>
+           <span id="msgRot1" style="color:green; display:none; margin-left:10px;">
+            Copied!
+           </span>
+           <script>
+            function showMsgRot1() {
+    const msg = document.getElementById('msgRot1');
+    msg.style.display = 'inline';
+    setTimeout(() => { msg.style.display = 'none'; }, 1500);
+}
+           </script>
+          </br>
          </p>
          <div class="meta-item">
           <i>
@@ -2467,9 +2484,19 @@
           to design the flag, but unfortunately all my spaces got deleted. However, I had taken the hash of the flag.
           <br/>
           SHA256 hash :
-          <code>
+          <code id="hash" onclick="navigator.clipboard.writeText(this.innerText); showMsg()" style="cursor:pointer;">
            8177705660b2a68454c7e70850501b0184401ab24ad00fc06a5320fe71eec51d
           </code>
+          <span id="msg" style="color:green; display:none; margin-left:10px;">
+           Copied!
+          </span>
+          <script>
+           function showMsg() {
+    const msg = document.getElementById('msg');
+    msg.style.display = 'inline';
+    setTimeout(() => { msg.style.display = 'none'; }, 1500);
+}
+          </script>
          </p>
          <p>
           <strong>
@@ -3282,8 +3309,9 @@
            Description:
           </strong>
           Mero kaan bigryo jasto xa.. Chasma lagauxu wait!
-          <br/>
-          Note: Flag is case sensitive. Before Uploading flag Please check the flag format below:
+          <br>
+           Note: Flag is case sensitive. Before Uploading flag Please check the flag format below:
+          </br>
          </p>
          <p>
           <strong>
@@ -4796,7 +4824,22 @@
           <strong>
            Description:
           </strong>
-          I've hidden some data using XOR with a single byte, but that byte is a secret. Don't forget to decode from hex first.  73626960647f6b206821204f21254f7d694f7624662065622127234f726927756d
+          I've hidden some data using XOR with a single byte, but that byte is a secret. Don't forget to decode from hex first.
+          <br/>
+          Hex data :
+          <code id="xor" onclick="navigator.clipboard.writeText(this.innerText); showMsgXOR()" style="cursor:pointer;">
+           73626960647f6b206821204f21254f7d694f7624662065622127234f726927756d
+          </code>
+          <span id="msgXOR" style="color:green; display:none; margin-left:10px;">
+           Copied!
+          </span>
+          <script>
+           function showMsgXOR() {
+    const msg = document.getElementById('msgXOR');
+    msg.style.display = 'inline';
+    setTimeout(() => { msg.style.display = 'none'; }, 1500);
+}
+          </script>
          </p>
          <div class="meta-item">
           <i>
@@ -4922,13 +4965,16 @@
           <strong>
            Description:
           </strong>
-          1100 1111 1110 1111 1100 1111 1100 1010 1001 1110 1011 1010 1010 1001 1110 1011 1001 1100 1100
-          <br/>
-          To prevent industrial espionage, the development team devised their own secret method of communication. By using a custom encoding scheme, they ensured that only insiders could decipher their messages. However, one of their transmissions has been intercepted. Your task is to decode it and reconstruct the flag before it falls into the wrong hands. The flag is basecally in the attachement. To make a complete flag, you must put the result in discordctf{}.
-          <br/>
-          Hint:
-          <br/>
-          Binary is also known as Base 2. This means it is composed of only 0's and 1's. What happen if binary has base 3, base 4 , base 5 and so on.....
+          <code>
+           1100 1111 1110 1111 1100 1111 1100 1010 1001 1110 1011 1010 1010 1001 1110 1011 1001 1100 1100
+          </code>
+          <br>
+           To prevent industrial espionage, the development team devised their own secret method of communication. By using a custom encoding scheme, they ensured that only insiders could decipher their messages. However, one of their transmissions has been intercepted. Your task is to decode it and reconstruct the flag before it falls into the wrong hands. The flag is basecally in the attachement. To make a complete flag, you must put the result in discordctf{}.
+           <br/>
+           Hint:
+           <br/>
+           Binary is also known as Base 2. This means it is composed of only 0's and 1's. What happen if binary has base 3, base 4 , base 5 and so on.....
+          </br>
          </p>
          <p>
           <strong>
@@ -5062,11 +5108,23 @@
           <strong>
            Description:
           </strong>
-          0e0b213f26041e480b26217f27342e175d0e070a3c5b103e2526217f27342e175d0e077e263451150104
+          <code id="xor2" onclick="navigator.clipboard.writeText(this.innerText); showMsgXOR2()" style="cursor:pointer;">
+           0e0b213f26041e480b26217f27342e175d0e070a3c5b103e2526217f27342e175d0e077e263451150104
+          </code>
+          <span id="msgXOR2" style="color:green; display:none; margin-left:10px;">
+           Copied!
+          </span>
           <br/>
           Data is encrypted. Find the key and get the flag.
           <br/>
-          1 minute , Do you know the basic concept of XOR ??
+          1 minute, Do you know the basic concept of XOR?
+          <script>
+           function showMsgXOR2() {
+    const msg = document.getElementById('msgXOR2');
+    msg.style.display = 'inline';
+    setTimeout(() => { msg.style.display = 'none'; }, 1500);
+}
+          </script>
          </p>
          <div class="meta-item">
           <i>
