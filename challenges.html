@@ -2432,6 +2432,149 @@
       <script>
        document.querySelector(`.category[id="cat-misc"]`).style.display = "block";
       </script>
+      <div class="challenge" id="whitespace" style="--accent-color: hsl(235, 80%, 60%)">
+       <div class="challenge-header" onclick="toggleChallengeDetails('whitespace')">
+        <h3>
+         Whitespace
+        </h3>
+        <div class="challenge-meta">
+         <div class="meta-item">
+          <i>
+           ⚡
+          </i>
+          <span class="difficulty-medium">
+           Medium
+          </span>
+         </div>
+        </div>
+        <i class="toggle-icon">
+         ▼
+        </i>
+        <div class="points">
+         🚩500
+        </div>
+       </div>
+       <div class="challenge-details" id="details-whitespace">
+        <div class="challenge-description">
+         <p>
+          <strong>
+           Description:
+          </strong>
+          I used this
+          <a href="https://patorjk.com/software/taag/#p=display&amp;f=3x5&amp;t=">
+           site
+          </a>
+          to design the flag, but unfortunately all my spaces got deleted. However, I had taken the hash of the flag.
+          <br/>
+          SHA256 hash :
+          <code>
+           8177705660b2a68454c7e70850501b0184401ab24ad00fc06a5320fe71eec51d
+          </code>
+         </p>
+         <p>
+          <strong>
+           Attachment:
+          </strong>
+          <a href="https://drive.google.com/file/d/1cc0hAbI4PsVR8CJWbN1DavUKxDy_8fje/view?usp=sharing" target="_blank">
+           Download
+          </a>
+         </p>
+         <div class="meta-item">
+          <i>
+           🔑
+          </i>
+          <span class="tooltip">
+           Flag Format
+           <span class="tooltiptext">
+            The flag must match this pattern exactly
+           </span>
+          </span>
+          :
+          <code>
+           AOHF{}
+          </code>
+         </div>
+        </div>
+        <div class="flag-form">
+         <input autocomplete="off" class="flag-input" id="input-whitespace" placeholder="Enter your flag here..." type="text"/>
+         <button class="flag-submit" onclick="checkFlag_whitespace()">
+          <i>
+           🔒
+          </i>
+          Submit Flag
+         </button>
+         <div class="result" id="result-whitespace">
+         </div>
+        </div>
+       </div>
+      </div>
+      <script>
+       async function checkFlag_whitespace() {
+            const input = document.getElementById("input-whitespace").value.trim();
+            const resultElement = document.getElementById("result-whitespace");
+            const challengeCard = document.getElementById("whitespace");
+            
+            // Clear previous result and show loading state
+            resultElement.className = "result loading show";
+            resultElement.textContent = "🔐 Verifying your flag...";
+            
+            // Simulate network delay for realism
+            await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 700));
+            
+            try {
+                // Client-side SHA-256 hashing
+                const msgBuffer = new TextEncoder().encode(input);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+                if (hashHex === "8177705660b2a68454c7e70850501b0184401ab24ad00fc06a5320fe71eec51d") {
+                    // Correct flag
+                    resultElement.className = "result success show";
+                    resultElement.textContent = "✅ Correct! Flag accepted!";
+                    
+                    // Celebration effects
+                    challengeCard.style.border = "1px solid var(--success)";
+                    challengeCard.style.boxShadow = "0 0 20px rgba(0, 204, 102, 0.5)";
+                    challengeCard.style.animation = "pulse 1.5s infinite";
+                    
+                    // Create confetti explosion
+                    createConfetti();
+                    
+                    // Add success badge to challenge
+                    const successBadge = document.createElement('div');
+                    successBadge.innerHTML = '<div style="position: absolute; top: 10px; right: 10px; background: var(--success); color: black; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">SOLVED</div>';
+                    challengeCard.appendChild(successBadge);
+                    
+                    // Disable input after success
+                    document.getElementById("input-whitespace").disabled = true;
+                    document.querySelector(`button[onclick="checkFlag_whitespace()"]`).disabled = true;
+                    
+                    // Stop pulse animation after 3 seconds
+                    setTimeout(() => {
+                        challengeCard.style.animation = "";
+                    }, 3000);
+                } else {
+                    // Incorrect flag
+                    resultElement.className = "result error show";
+                    resultElement.textContent = "❌ Incorrect flag! Try again.";
+                    
+                    // Shake animation
+                    challengeCard.style.animation = "shake 0.5s";
+                    setTimeout(() => {
+                        challengeCard.style.animation = "";
+                    }, 500);
+                }
+            } catch (error) {
+                resultElement.className = "result error show";
+                resultElement.textContent = "⚠️ Error verifying flag. Please try again.";
+                console.error("Flag verification error:", error);
+            }
+        }
+      </script>
+      <script>
+       document.querySelector(`.category[id="cat-misc"]`).style.display = "block";
+      </script>
       <!-- misc-challenges-here -->
      </div>
     </section>
@@ -2495,15 +2638,16 @@
          </div>
         </div>
         <div class="flag-form">
-         <input autocomplete="off" class="flag-input" id="input-steg" placeholder="Enter your flag here..." type="text"/>
-         <button class="flag-submit" onclick="checkFlag_steg()">
-          <i>
-           🔒
-          </i>
-          Submit Flag
-         </button>
-         <div class="result" id="result-steg">
-         </div>
+         <input autocomplete="off" class="flag-input" id="input-steg" placeholder="Enter your flag here..." type="text">
+          <button class="flag-submit" onclick="checkFlag_steg()">
+           <i>
+            🔒
+           </i>
+           Submit Flag
+          </button>
+          <div class="result" id="result-steg">
+          </div>
+         </input>
         </div>
        </div>
       </div>
@@ -3139,8 +3283,9 @@
            Description:
           </strong>
           Mero kaan bigryo jasto xa.. Chasma lagauxu wait!
-          <br/>
-          Note: Flag is case sensitive. Before Uploading flag Please check the flag format below:
+          <br>
+           Note: Flag is case sensitive. Before Uploading flag Please check the flag format below:
+          </br>
          </p>
          <p>
           <strong>
