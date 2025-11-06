@@ -4786,6 +4786,280 @@
       <script>
        document.querySelector(`.category[id="cat-forensic"]`).style.display = "block";
       </script>
+      <div class="challenge" id="toxic_base64" style="--accent-color: hsl(119, 80%, 60%)">
+       <div class="challenge-header" onclick="toggleChallengeDetails('toxic_base64')">
+        <h3>
+         Toxic Base64
+        </h3>
+        <div class="challenge-meta">
+         <div class="meta-item">
+          <i>
+           ⚡
+          </i>
+          <span class="difficulty-medium">
+           Medium
+          </span>
+         </div>
+        </div>
+        <i class="toggle-icon">
+         ▼
+        </i>
+        <div class="points">
+         🚩500
+        </div>
+       </div>
+       <div class="challenge-details" id="details-toxic_base64">
+        <div class="challenge-description">
+         <p>
+          <strong>
+           Description:
+          </strong>
+          First , I will just rock you. If you come again, I will rock you in very toxic way and in the layer of reverberation i will kick on your base.
+         </p>
+         <p>
+          <strong>
+           Attachment:
+          </strong>
+          <a href="https://drive.google.com/file/d/1icqsKYUkI0VA_7H8K7eTKnKlhl7O-oqa/view?usp=sharing" target="_blank">
+           Download
+          </a>
+         </p>
+         <div class="meta-item">
+          <i>
+           🔑
+          </i>
+          <span class="tooltip">
+           Flag Format
+           <span class="tooltiptext">
+            The flag must match this pattern exactly
+           </span>
+          </span>
+          :
+          <code>
+           AOHF{}
+          </code>
+         </div>
+        </div>
+        <div class="flag-form">
+         <input autocomplete="off" class="flag-input" id="input-toxic_base64" placeholder="Enter your flag here..." type="text"/>
+         <button class="flag-submit" onclick="checkFlag_toxic_base64()">
+          <i>
+           🔒
+          </i>
+          Submit Flag
+         </button>
+         <div class="result" id="result-toxic_base64">
+         </div>
+        </div>
+       </div>
+      </div>
+      <script>
+       async function checkFlag_toxic_base64() {
+            const input = document.getElementById("input-toxic_base64").value.trim();
+            const resultElement = document.getElementById("result-toxic_base64");
+            const challengeCard = document.getElementById("toxic_base64");
+            
+            // Clear previous result and show loading state
+            resultElement.className = "result loading show";
+            resultElement.textContent = "🔐 Verifying your flag...";
+            
+            // Simulate network delay for realism
+            await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 700));
+            
+            try {
+                // Client-side SHA-256 hashing
+                const msgBuffer = new TextEncoder().encode(input);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+                if (hashHex === "dd3d8e1d10d1f93c6ae184c669c6f8ce4f7ab092b565a24f5c8b8a461a8942fb") {
+                    // Correct flag
+                    resultElement.className = "result success show";
+                    resultElement.textContent = "✅ Correct! Flag accepted!";
+                    
+                    // Celebration effects
+                    challengeCard.style.border = "1px solid var(--success)";
+                    challengeCard.style.boxShadow = "0 0 20px rgba(0, 204, 102, 0.5)";
+                    challengeCard.style.animation = "pulse 1.5s infinite";
+                    
+                    // Create confetti explosion
+                    createConfetti();
+                    
+                    // Add success badge to challenge
+                    const successBadge = document.createElement('div');
+                    successBadge.innerHTML = '<div style="position: absolute; top: 10px; right: 10px; background: var(--success); color: black; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">SOLVED</div>';
+                    challengeCard.appendChild(successBadge);
+                    
+                    // Disable input after success
+                    document.getElementById("input-toxic_base64").disabled = true;
+                    document.querySelector(`button[onclick="checkFlag_toxic_base64()"]`).disabled = true;
+                    
+                    // Stop pulse animation after 3 seconds
+                    setTimeout(() => {
+                        challengeCard.style.animation = "";
+                    }, 3000);
+                } else {
+                    // Incorrect flag
+                    resultElement.className = "result error show";
+                    resultElement.textContent = "❌ Incorrect flag! Try again.";
+                    
+                    // Shake animation
+                    challengeCard.style.animation = "shake 0.5s";
+                    setTimeout(() => {
+                        challengeCard.style.animation = "";
+                    }, 500);
+                }
+            } catch (error) {
+                resultElement.className = "result error show";
+                resultElement.textContent = "⚠️ Error verifying flag. Please try again.";
+                console.error("Flag verification error:", error);
+            }
+        }
+      </script>
+      <script>
+       document.querySelector(`.category[id="cat-forensic"]`).style.display = "block";
+      </script>
+      <div class="challenge" id="sector_3_by_9" style="--accent-color: hsl(217, 80%, 60%)">
+       <div class="challenge-header" onclick="toggleChallengeDetails('sector_3_by_9')">
+        <h3>
+         Sector 3 by 9
+        </h3>
+        <div class="challenge-meta">
+         <div class="meta-item">
+          <i>
+           ⚡
+          </i>
+          <span class="difficulty-medium">
+           Medium
+          </span>
+         </div>
+        </div>
+        <i class="toggle-icon">
+         ▼
+        </i>
+        <div class="points">
+         🚩500
+        </div>
+       </div>
+       <div class="challenge-details" id="details-sector_3_by_9">
+        <div class="challenge-description">
+         <p>
+          <strong>
+           Description:
+          </strong>
+          कहते हैं जितनी चादर है उतने पैर फैलाओ।
+          <br/>
+          पैर क्यों कम फैलाने का, साला चादर ही बड़ी कर ली।
+          <br/>
+          Stretch your legs only as far as the blanket allows.
+          <br/>
+          Rocky bhai said, Why limit the stretch of my legs? I just made the blanket bigger!
+         </p>
+         <p>
+          <strong>
+           Attachment:
+          </strong>
+          <a href="https://drive.google.com/file/d/1gvyVu3pnTOr9UbT1aNKwwkzJ88vh_4D3/view?usp=sharing" target="_blank">
+           Download
+          </a>
+         </p>
+         <div class="meta-item">
+          <i>
+           🔑
+          </i>
+          <span class="tooltip">
+           Flag Format
+           <span class="tooltiptext">
+            The flag must match this pattern exactly
+           </span>
+          </span>
+          :
+          <code>
+           AOHF{}
+          </code>
+         </div>
+        </div>
+        <div class="flag-form">
+         <input autocomplete="off" class="flag-input" id="input-sector_3_by_9" placeholder="Enter your flag here..." type="text"/>
+         <button class="flag-submit" onclick="checkFlag_sector_3_by_9()">
+          <i>
+           🔒
+          </i>
+          Submit Flag
+         </button>
+         <div class="result" id="result-sector_3_by_9">
+         </div>
+        </div>
+       </div>
+      </div>
+      <script>
+       async function checkFlag_sector_3_by_9() {
+            const input = document.getElementById("input-sector_3_by_9").value.trim();
+            const resultElement = document.getElementById("result-sector_3_by_9");
+            const challengeCard = document.getElementById("sector_3_by_9");
+            
+            // Clear previous result and show loading state
+            resultElement.className = "result loading show";
+            resultElement.textContent = "🔐 Verifying your flag...";
+            
+            // Simulate network delay for realism
+            await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 700));
+            
+            try {
+                // Client-side SHA-256 hashing
+                const msgBuffer = new TextEncoder().encode(input);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+                if (hashHex === "7b3e35381041323d3fcb08a0d71a23d5b0b4d878fbacf37ed581bbed3a07cfb1") {
+                    // Correct flag
+                    resultElement.className = "result success show";
+                    resultElement.textContent = "✅ Correct! Flag accepted!";
+                    
+                    // Celebration effects
+                    challengeCard.style.border = "1px solid var(--success)";
+                    challengeCard.style.boxShadow = "0 0 20px rgba(0, 204, 102, 0.5)";
+                    challengeCard.style.animation = "pulse 1.5s infinite";
+                    
+                    // Create confetti explosion
+                    createConfetti();
+                    
+                    // Add success badge to challenge
+                    const successBadge = document.createElement('div');
+                    successBadge.innerHTML = '<div style="position: absolute; top: 10px; right: 10px; background: var(--success); color: black; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">SOLVED</div>';
+                    challengeCard.appendChild(successBadge);
+                    
+                    // Disable input after success
+                    document.getElementById("input-sector_3_by_9").disabled = true;
+                    document.querySelector(`button[onclick="checkFlag_sector_3_by_9()"]`).disabled = true;
+                    
+                    // Stop pulse animation after 3 seconds
+                    setTimeout(() => {
+                        challengeCard.style.animation = "";
+                    }, 3000);
+                } else {
+                    // Incorrect flag
+                    resultElement.className = "result error show";
+                    resultElement.textContent = "❌ Incorrect flag! Try again.";
+                    
+                    // Shake animation
+                    challengeCard.style.animation = "shake 0.5s";
+                    setTimeout(() => {
+                        challengeCard.style.animation = "";
+                    }, 500);
+                }
+            } catch (error) {
+                resultElement.className = "result error show";
+                resultElement.textContent = "⚠️ Error verifying flag. Please try again.";
+                console.error("Flag verification error:", error);
+            }
+        }
+      </script>
+      <script>
+       document.querySelector(`.category[id="cat-forensic"]`).style.display = "block";
+      </script>
       <!-- forensic-challenges-here -->
      </div>
     </section>
@@ -4823,21 +5097,22 @@
            Description:
           </strong>
           I've hidden some data using XOR with a single byte, but that byte is a secret. Don't forget to decode from hex first.
-          <br/>
-          Hex data :
-          <code id="xor" onclick="navigator.clipboard.writeText(this.innerText); showMsgXOR()" style="cursor:pointer;">
-           73626960647f6b206821204f21254f7d694f7624662065622127234f726927756d
-          </code>
-          <span id="msgXOR" style="color:green; display:none; margin-left:10px;">
-           Copied!
-          </span>
-          <script>
-           function showMsgXOR() {
+          <br>
+           Hex data :
+           <code id="xor" onclick="navigator.clipboard.writeText(this.innerText); showMsgXOR()" style="cursor:pointer;">
+            73626960647f6b206821204f21254f7d694f7624662065622127234f726927756d
+           </code>
+           <span id="msgXOR" style="color:green; display:none; margin-left:10px;">
+            Copied!
+           </span>
+           <script>
+            function showMsgXOR() {
     const msg = document.getElementById('msgXOR');
     msg.style.display = 'inline';
     setTimeout(() => { msg.style.display = 'none'; }, 1500);
 }
-          </script>
+           </script>
+          </br>
          </p>
          <div class="meta-item">
           <i>
@@ -4856,15 +5131,16 @@
          </div>
         </div>
         <div class="flag-form">
-         <input autocomplete="off" class="flag-input" id="input-first_xor" placeholder="Enter your flag here..." type="text"/>
-         <button class="flag-submit" onclick="checkFlag_first_xor()">
-          <i>
-           🔒
-          </i>
-          Submit Flag
-         </button>
-         <div class="result" id="result-first_xor">
-         </div>
+         <input autocomplete="off" class="flag-input" id="input-first_xor" placeholder="Enter your flag here..." type="text">
+          <button class="flag-submit" onclick="checkFlag_first_xor()">
+           <i>
+            🔒
+           </i>
+           Submit Flag
+          </button>
+          <div class="result" id="result-first_xor">
+          </div>
+         </input>
         </div>
        </div>
       </div>
@@ -4966,12 +5242,14 @@
           <code>
            1100 1111 1110 1111 1100 1111 1100 1010 1001 1110 1011 1010 1010 1001 1110 1011 1001 1100 1100
           </code>
-          <br/>
-          To prevent industrial espionage, the development team devised their own secret method of communication. By using a custom encoding scheme, they ensured that only insiders could decipher their messages. However, one of their transmissions has been intercepted. Your task is to decode it and reconstruct the flag before it falls into the wrong hands. The flag is basecally in the attachement. To make a complete flag, you must put the result in discordctf{}.
-          <br/>
-          Hint:
-          <br/>
-          Binary is also known as Base 2. This means it is composed of only 0's and 1's. What happen if binary has base 3, base 4 , base 5 and so on.....
+          <br>
+           To prevent industrial espionage, the development team devised their own secret method of communication. By using a custom encoding scheme, they ensured that only insiders could decipher their messages. However, one of their transmissions has been intercepted. Your task is to decode it and reconstruct the flag before it falls into the wrong hands. The flag is basecally in the attachement. To make a complete flag, you must put the result in discordctf{}.
+           <br>
+            Hint:
+            <br/>
+            Binary is also known as Base 2. This means it is composed of only 0's and 1's. What happen if binary has base 3, base 4 , base 5 and so on.....
+           </br>
+          </br>
          </p>
          <p>
           <strong>
@@ -4998,15 +5276,16 @@
          </div>
         </div>
         <div class="flag-form">
-         <input autocomplete="off" class="flag-input" id="input-basecally_a_flag_" placeholder="Enter your flag here..." type="text"/>
-         <button class="flag-submit" onclick="checkFlag_basecally_a_flag_()">
-          <i>
-           🔒
-          </i>
-          Submit Flag
-         </button>
-         <div class="result" id="result-basecally_a_flag_">
-         </div>
+         <input autocomplete="off" class="flag-input" id="input-basecally_a_flag_" placeholder="Enter your flag here..." type="text">
+          <button class="flag-submit" onclick="checkFlag_basecally_a_flag_()">
+           <i>
+            🔒
+           </i>
+           Submit Flag
+          </button>
+          <div class="result" id="result-basecally_a_flag_">
+          </div>
+         </input>
         </div>
        </div>
       </div>
@@ -6874,6 +7153,140 @@
       <script>
        document.querySelector(`.category[id="cat-web"]`).style.display = "block";
       </script>
+      <div class="challenge" id="life_or_death" style="--accent-color: hsl(288, 80%, 60%)">
+       <div class="challenge-header" onclick="toggleChallengeDetails('life_or_death')">
+        <h3>
+         Life or Death
+        </h3>
+        <div class="challenge-meta">
+         <div class="meta-item">
+          <i>
+           ⚡
+          </i>
+          <span class="difficulty-easy">
+           Easy
+          </span>
+         </div>
+        </div>
+        <i class="toggle-icon">
+         ▼
+        </i>
+        <div class="points">
+         🚩450
+        </div>
+       </div>
+       <div class="challenge-details" id="details-life_or_death">
+        <div class="challenge-description">
+         <p>
+          <strong>
+           Description:
+          </strong>
+          Two doors. Ten rounds. One misstep resets everything.
+         </p>
+         <p>
+          <strong>
+           Attachment:
+          </strong>
+          <a href="https://life-or-death.onrender.com/" target="_blank">
+           Download
+          </a>
+         </p>
+         <div class="meta-item">
+          <i>
+           🔑
+          </i>
+          <span class="tooltip">
+           Flag Format
+           <span class="tooltiptext">
+            The flag must match this pattern exactly
+           </span>
+          </span>
+          :
+          <code>
+           AOHF{}
+          </code>
+         </div>
+        </div>
+        <div class="flag-form">
+         <input autocomplete="off" class="flag-input" id="input-life_or_death" placeholder="Enter your flag here..." type="text"/>
+         <button class="flag-submit" onclick="checkFlag_life_or_death()">
+          <i>
+           🔒
+          </i>
+          Submit Flag
+         </button>
+         <div class="result" id="result-life_or_death">
+         </div>
+        </div>
+       </div>
+      </div>
+      <script>
+       async function checkFlag_life_or_death() {
+            const input = document.getElementById("input-life_or_death").value.trim();
+            const resultElement = document.getElementById("result-life_or_death");
+            const challengeCard = document.getElementById("life_or_death");
+            
+            // Clear previous result and show loading state
+            resultElement.className = "result loading show";
+            resultElement.textContent = "🔐 Verifying your flag...";
+            
+            // Simulate network delay for realism
+            await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 700));
+            
+            try {
+                // Client-side SHA-256 hashing
+                const msgBuffer = new TextEncoder().encode(input);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+                if (hashHex === "3804dcd664fa75537e6a63acd75ce5f1e889e462c98ba7da7ebc819cef9e21c1") {
+                    // Correct flag
+                    resultElement.className = "result success show";
+                    resultElement.textContent = "✅ Correct! Flag accepted!";
+                    
+                    // Celebration effects
+                    challengeCard.style.border = "1px solid var(--success)";
+                    challengeCard.style.boxShadow = "0 0 20px rgba(0, 204, 102, 0.5)";
+                    challengeCard.style.animation = "pulse 1.5s infinite";
+                    
+                    // Create confetti explosion
+                    createConfetti();
+                    
+                    // Add success badge to challenge
+                    const successBadge = document.createElement('div');
+                    successBadge.innerHTML = '<div style="position: absolute; top: 10px; right: 10px; background: var(--success); color: black; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: bold;">SOLVED</div>';
+                    challengeCard.appendChild(successBadge);
+                    
+                    // Disable input after success
+                    document.getElementById("input-life_or_death").disabled = true;
+                    document.querySelector(`button[onclick="checkFlag_life_or_death()"]`).disabled = true;
+                    
+                    // Stop pulse animation after 3 seconds
+                    setTimeout(() => {
+                        challengeCard.style.animation = "";
+                    }, 3000);
+                } else {
+                    // Incorrect flag
+                    resultElement.className = "result error show";
+                    resultElement.textContent = "❌ Incorrect flag! Try again.";
+                    
+                    // Shake animation
+                    challengeCard.style.animation = "shake 0.5s";
+                    setTimeout(() => {
+                        challengeCard.style.animation = "";
+                    }, 500);
+                }
+            } catch (error) {
+                resultElement.className = "result error show";
+                resultElement.textContent = "⚠️ Error verifying flag. Please try again.";
+                console.error("Flag verification error:", error);
+            }
+        }
+      </script>
+      <script>
+       document.querySelector(`.category[id="cat-web"]`).style.display = "block";
+      </script>
       <!-- web-challenges-here -->
      </div>
     </section>
@@ -6937,15 +7350,16 @@
          </div>
         </div>
         <div class="flag-form">
-         <input autocomplete="off" class="flag-input" id="input-_somewhere_in_space" placeholder="Enter your flag here..." type="text"/>
-         <button class="flag-submit" onclick="checkFlag__somewhere_in_space()">
-          <i>
-           🔒
-          </i>
-          Submit Flag
-         </button>
-         <div class="result" id="result-_somewhere_in_space">
-         </div>
+         <input autocomplete="off" class="flag-input" id="input-_somewhere_in_space" placeholder="Enter your flag here..." type="text">
+          <button class="flag-submit" onclick="checkFlag__somewhere_in_space()">
+           <i>
+            🔒
+           </i>
+           Submit Flag
+          </button>
+          <div class="result" id="result-_somewhere_in_space">
+          </div>
+         </input>
         </div>
        </div>
       </div>
