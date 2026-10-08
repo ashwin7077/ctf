@@ -4,586 +4,121 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>
-   CTF Scoreboard
+   Scoreboard - Attack On Hash Function
   </title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js">
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&amp;family=Orbitron:wght@500;700&amp;display=swap" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+  <link href="theme.css" rel="stylesheet"/>
   <style>
-   :root {
-        --primary: #2e7d32;
-        --primary-light: #4caf50;
-        --primary-lighter: #81c784;
-        --primary-dark: #1b5e20;
-        --primary-darker: #0d3c13;
-        --accent: #a5d6a7;
-        --accent-light: #c8e6c9;
-        --accent-dark: #75a478;
-        --dark: #121212;
-        --darker: #0a0a0a;
-        --light: #f5f5f5;
-        --lighter: #ffffff;
-        --success: #4caf50;
-        --warning: #ffc107;
-        --danger: #f44336;
-        --info: #2196f3;
-        --text-primary: rgba(255, 255, 255, 0.95);
-        --text-secondary: rgba(255, 255, 255, 0.7);
-        --text-tertiary: rgba(255, 255, 255, 0.5);
-        --elevation-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-        --elevation-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-        --elevation-3: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-        --elevation-4: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-    
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-    
-    body {
-        background: linear-gradient(135deg, var(--darker), var(--dark));
-        color: var(--text-primary);
-        font-family: 'Montserrat', sans-serif;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 0;
-        background-attachment: fixed;
-        overflow-x: hidden;
-        line-height: 1.6;
-    }
-    
-    /* Navigation Bar */
-    .navbar {
-        width: 100%;
-        background: rgba(18, 18, 18, 0.98);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        padding: 1rem 2rem;
-        display: flex;
-        justify-content: center;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        box-shadow: var(--elevation-2);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    
-    .nav-container {
-        width: 100%;
-        max-width: 1200px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .nav-logo {
-        font-family: 'Orbitron', sans-serif;
-        font-weight: 700;
-        font-size: 1.8rem;
-        color: var(--lighter);
-        text-decoration: none;
-        background: linear-gradient(135deg, var(--primary-light), var(--accent));
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
-        letter-spacing: 1px;
-        transition: var(--transition);
-    }
-    
-    .nav-logo:hover {
-        text-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
-    }
-    
-    .nav-links {
-        display: flex;
-        gap: 1rem;
-    }
-    
-    .nav-link {
-        color: var(--text-secondary);
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        transition: var(--transition);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .nav-link::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, var(--primary-light), var(--accent));
-        transform: scaleX(0);
-        transform-origin: right;
-        transition: transform 0.3s ease;
-    }
-    
-    .nav-link:hover, .nav-link.active {
-        color: var(--lighter);
-    }
-    
-    .nav-link:hover::before, .nav-link.active::before {
-        transform: scaleX(1);
-        transform-origin: left;
-    }
-    
-    .nav-link i {
-        font-size: 1rem;
-    }
-    
-    .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem 1.5rem;
-        flex: 1;
-    }
-    
-    header {
-        text-align: center;
-        margin-bottom: 3rem;
-        position: relative;
-        width: 100%;
-    }
-    
-    h1 {
-        font-family: 'Orbitron', sans-serif;
-        font-size: clamp(2.5rem, 5vw, 4rem);
-        color: var(--lighter);
-        margin-bottom: 1.5rem;
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        background: linear-gradient(135deg, var(--primary-light), var(--accent));
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
-        position: relative;
-        z-index: 1;
-        line-height: 1.2;
-    }
-    
-    h1::after {
-        content: '';
-        position: absolute;
-        bottom: -15px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 150px;
-        height: 4px;
-        background: linear-gradient(90deg, var(--primary-light), var(--accent));
-        border-radius: 4px;
-        box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
-    }
-    
-    .subtitle {
-        font-size: 1.2rem;
-        color: var(--text-secondary);
-        max-width: 700px;
-        margin: 0 auto;
-        line-height: 1.6;
-        font-weight: 300;
-    }
-    
-    .chart-container {
-        width: 100%;
-        max-width: 1000px;
-        margin: 3rem auto;
-        background: rgba(18, 18, 18, 0.6);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border-radius: 20px;
-        padding: 2rem;
-        box-shadow: var(--elevation-3);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        transition: var(--transition);
-        height: 500px;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .chart-container::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
-        pointer-events: none;
-    }
-    
-    .chart-container:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--elevation-4);
-        border-color: rgba(255, 255, 255, 0.15);
-    }
-    
-    canvas {
-        width: 100% !important;
-        height: auto !important;
-    }
-    
-    table.scoreboard {
-        width: 100%;
-        max-width: 1000px;
-        margin: 4rem auto;
-        border-collapse: separate;
-        border-spacing: 0;
-        background: rgba(18, 18, 18, 0.6);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: var(--elevation-3);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        transition: var(--transition);
-    }
-    
-    table.scoreboard:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--elevation-4);
-        border-color: rgba(255, 255, 255, 0.15);
-    }
-    
-    table.scoreboard thead {
-        background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-    }
-    
-    table.scoreboard th {
-        padding: 1.5rem 2rem;
-        text-align: left;
-        font-weight: 600;
-        color: var(--lighter);
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        font-size: 0.9rem;
-        font-family: 'Orbitron', sans-serif;
-    }
-    
-    table.scoreboard th:first-child {
-        border-top-left-radius: 20px;
-    }
-    
-    table.scoreboard th:last-child {
-        border-top-right-radius: 20px;
-    }
-    
-    table.scoreboard tbody tr {
-        transition: var(--transition);
-    }
-    
-    table.scoreboard tbody tr:nth-child(odd) {
-        background: rgba(255, 255, 255, 0.03);
-    }
-    
-    table.scoreboard tbody tr:hover {
-        background: rgba(76, 175, 80, 0.15);
-        transform: scale(1.01);
-    }
-    
-    table.scoreboard td {
-        padding: 1.5rem 2rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        font-weight: 400;
-        color: var(--text-primary);
-    }
-    
-    table.scoreboard td:first-child {
-        font-weight: 700;
-        text-align: center;
-        width: 80px;
-        font-size: 1.1em;
-        letter-spacing: 1px;
-    }
-    
-    table.scoreboard tr:last-child td {
-        border-bottom: none;
-    }
-    
-    /* Rank specific styling */
-    .rank-1 {
-        background: rgba(255, 215, 0, 0.05) !important;
-    }
-    
-    .rank-1 td:first-child {
-        color: #ffd700;
-        text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-        font-size: 1.3em;
-    }
-    
-    .rank-2 {
-        background: rgba(192, 192, 192, 0.05) !important;
-    }
-    
-    .rank-2 td:first-child {
-        color: #c0c0c0;
-        text-shadow: 0 0 8px rgba(192, 192, 192, 0.5);
-        font-size: 1.2em;
-    }
-    
-    .rank-3 {
-        background: rgba(205, 127, 50, 0.05) !important;
-    }
-    
-    .rank-3 td:first-child {
-        color: #cd7f32;
-        text-shadow: 0 0 8px rgba(205, 127, 50, 0.5);
-        font-size: 1.1em;
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 992px) {
-        .container {
-            padding: 2rem 1rem;
+   .terminal.leaderboard {
+            border-top: 3px solid var(--scoreboard-color);
         }
-        
-        .chart-container, table.scoreboard {
-            padding: 1.5rem;
-        }
-        
-        table.scoreboard th, table.scoreboard td {
-            padding: 1.2rem 1.5rem;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .nav-container {
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        
-        .nav-links {
-            width: 100%;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
+
         .chart-container {
-            height: 400px;
-            padding: 1.2rem;
+            position: relative;
+            height: 360px;
         }
-        
-        table.scoreboard th, table.scoreboard td {
-            padding: 1rem;
-            font-size: 0.9rem;
+
+        .table-wrap {
+            overflow-x: auto;
         }
-        
-        h1 {
-            font-size: 2.5rem;
-        }
-        
-        .subtitle {
-            font-size: 1.1rem;
-        }
-    }
-    
-    @media (max-width: 576px) {
-        .nav-links {
-            flex-direction: column;
-            gap: 0.5rem;
-            align-items: center;
-        }
-        
-        .nav-link {
+
+        table.scoreboard {
             width: 100%;
-            text-align: center;
-            justify-content: center;
-        }
-        
-        .chart-container {
-            height: 350px;
-            padding: 1rem;
-        }
-        
-        table.scoreboard th, table.scoreboard td {
-            padding: 0.8rem;
-            font-size: 0.85rem;
-        }
-        
-        h1 {
-            font-size: 2rem;
-        }
-        
-        .subtitle {
+            border-collapse: collapse;
+            border: none;
             font-size: 1rem;
         }
-    }
-    
-    /* Animated background elements */
-    .bg-elements {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        overflow: hidden;
-        opacity: 0.6;
-    }
-    
-    .bg-element {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(80px);
-        animation: float 20s infinite linear;
-        opacity: 0.5;
-    }
-    
-    @keyframes float {
-        0% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
-        50% { transform: translateY(-50px) rotate(180deg); opacity: 0.8; }
-        100% { transform: translateY(0) rotate(360deg); opacity: 0.5; }
-    }
-    
-    /* Footer */
-    footer {
-        width: 100%;
-        background: rgba(18, 18, 18, 0.9);
-        padding: 2rem 1.5rem;
-        text-align: center;
-        margin-top: 3rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-    }
-    
-    .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-    }
-    
-    .footer-links {
-        display: flex;
-        gap: 2rem;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .footer-link {
-        color: var(--text-secondary);
-        text-decoration: none;
-        transition: var(--transition);
-        font-weight: 400;
-        position: relative;
-    }
-    
-    .footer-link::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background: var(--primary-light);
-        transition: width 0.3s ease;
-    }
-    
-    .footer-link:hover {
-        color: var(--accent);
-    }
-    
-    .footer-link:hover::after {
-        width: 100%;
-    }
-    
-    .copyright {
-        color: var(--text-tertiary);
-        font-size: 0.9rem;
-    }
-    
-    /* Scrollbar styling */
-    ::-webkit-scrollbar {
-        width: 10px;
-        height: 10px;
-    }
-    
-    ::-webkit-scrollbar-track {
-        background: rgba(18, 18, 18, 0.5);
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background: linear-gradient(var(--primary-dark), var(--primary-light));
-        border-radius: 10px;
-        border: 2px solid rgba(18, 18, 18, 0.5);
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(var(--primary), var(--primary-lighter));
-    }
-    
-    /* Floating particles animation */
-    .particles {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        overflow: hidden;
-    }
-    
-    .particle {
-        position: absolute;
-        background: rgba(76, 175, 80, 0.5);
-        border-radius: 50%;
-        filter: blur(1px);
-        animation: float-particle 15s infinite linear;
-    }
-    
-    @keyframes float-particle {
-        0% { transform: translateY(0) translateX(0); opacity: 0; }
-        10% { opacity: 0.5; }
-        90% { opacity: 0.5; }
-        100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
-    }
-   table.scoreboard td a {
-            color: #e0e0e0;
-            text-decoration: none;
-            transition: color 0.3s ease;
+
+        table.scoreboard th {
+            text-align: left;
+            color: var(--text-secondary);
+            font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            padding: 0.6rem 1rem;
+            border: none;
+            border-bottom: 1px dashed var(--card-border);
         }
+
+        table.scoreboard td {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        table.scoreboard th:first-child,
+        table.scoreboard td:first-child {
+            width: 4.5rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        table.scoreboard th:last-child,
+        table.scoreboard td:last-child {
+            text-align: right;
+        }
+
+        table.scoreboard td:last-child {
+            color: var(--text-primary);
+        font-weight: bold;
+        font-variant-numeric: tabular-nums;
+        }
+
+        table.scoreboard tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        table.scoreboard tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.04);
+        }
+
+        table.scoreboard td a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+        }
+
         table.scoreboard td a:hover {
             color: #ffffff;
-            text-decoration: underline;
+        text-decoration: underline;
+        }
+
+        table.scoreboard tr.rank-1 td:first-child,
+        table.scoreboard tr.rank-2 td:first-child,
+        table.scoreboard tr.rank-3 td:first-child {
+            font-size: 1.3rem;
+        }
+
+        table.scoreboard tr.rank-1 { box-shadow: inset 3px 0 0 #ffd700; }
+        table.scoreboard tr.rank-2 { box-shadow: inset 3px 0 0 #c0c0c0; }
+        table.scoreboard tr.rank-3 { box-shadow: inset 3px 0 0 #cd7f32; }
+
+        table.scoreboard tr.rank-1 td a { color: #ffd700; font-weight: bold; }
+        table.scoreboard tr.rank-2 td a { color: #e0e0e0; font-weight: bold; }
+        table.scoreboard tr.rank-3 td a { color: #e0a96d; font-weight: bold; }
+
+        @media (max-width: 576px) {
+            .chart-container { height: 280px; }
+            table.scoreboard th,
+            table.scoreboard td { padding: 0.5rem 0.5rem; font-size: 0.9rem; }
+            table.scoreboard th:first-child,
+            table.scoreboard td:first-child { width: 3rem; }
         }
   </style>
  </head>
  <body>
-  <div class="bg-elements">
-   <div class="bg-element" style="width: 300px; height: 300px; top: 10%; left: 5%; animation-delay: 0s;">
-   </div>
-   <div class="bg-element" style="width: 400px; height: 400px; bottom: 15%; right: 10%; animation-delay: 3s;">
-   </div>
-   <div class="bg-element" style="width: 200px; height: 200px; top: 50%; left: 30%; animation-delay: 6s;">
-   </div>
-  </div>
-  <!-- Navigation Bar -->
-  <nav class="navbar">
-   <div class="nav-container">
-    <a class="nav-logo" href="index.html">
-     CTF Arena
+  <div class="container">
+   <nav class="site-nav">
+    <a class="site-brand" href="index.html">
+     <span class="prompt">
+      $
+     </span>
+     AOHF
     </a>
-    <div class="nav-links">
+    <div class="site-links">
      <a class="nav-link" href="index.html">
       <i class="fas fa-home">
       </i>
@@ -600,682 +135,714 @@
       Scoreboard
      </a>
     </div>
-   </div>
-  </nav>
-  <div class="container">
-   <header>
-    <h1>
-     Attack On Hash Function
-    </h1>
-    <p class="subtitle">
-     Discord CTF Dynamic Scoreboard - Real-time tracking of competitors' progress and rankings
-    </p>
-   </header>
-   <div class="chart-container">
-    <canvas height="400" id="pointsChart" width="800">
-    </canvas>
-   </div>
-   <table border="1" class="dataframe scoreboard">
-    <thead>
-     <tr style="text-align: right;">
-      <th>
-       Rank
-      </th>
-      <th>
-       User
-      </th>
-      <th>
-       Points
-      </th>
-     </tr>
-    </thead>
-    <tbody>
-     <tr class="rank-1">
-      <td>
-       🥇
-      </td>
-      <td>
-       <a href="user/0xN1kU_H4X_!/challenges.html">
-        0xN1kU_H4X_!
-       </a>
-      </td>
-      <td>
-       9950
-      </td>
-     </tr>
-     <tr class="rank-2">
-      <td>
-       🥈
-      </td>
-      <td>
-       <a href="user/DargoTamber/challenges.html">
-        DargoTamber
-       </a>
-      </td>
-      <td>
-       6600
-      </td>
-     </tr>
-     <tr class="rank-3">
-      <td>
-       🥉
-      </td>
-      <td>
-       <a href="user/kharayo1x/challenges.html">
-        kharayo1x
-       </a>
-      </td>
-      <td>
-       4700
-      </td>
-     </tr>
-     <tr>
-      <td>
-       4
-      </td>
-      <td>
-       <a href="user/SHISHIR GHIMIRE/challenges.html">
-        SHISHIR GHIMIRE
-       </a>
-      </td>
-      <td>
-       4300
-      </td>
-     </tr>
-     <tr>
-      <td>
-       5
-      </td>
-      <td>
-       <a href="user/p0tato/challenges.html">
-        p0tato
-       </a>
-      </td>
-      <td>
-       4200
-      </td>
-     </tr>
-     <tr>
-      <td>
-       6
-      </td>
-      <td>
-       <a href="user/MrBender/challenges.html">
-        MrBender
-       </a>
-      </td>
-      <td>
-       3650
-      </td>
-     </tr>
-     <tr>
-      <td>
-       7
-      </td>
-      <td>
-       <a href="user/Oju D. Amatya/challenges.html">
-        Oju D. Amatya
-       </a>
-      </td>
-      <td>
-       2300
-      </td>
-     </tr>
-     <tr>
-      <td>
-       8
-      </td>
-      <td>
-       <a href="user/$sudo/challenges.html">
-        $sudo
-       </a>
-      </td>
-      <td>
-       2050
-      </td>
-     </tr>
-     <tr>
-      <td>
-       9
-      </td>
-      <td>
-       <a href="user/kinachaiyo/challenges.html">
-        kinachaiyo
-       </a>
-      </td>
-      <td>
-       1850
-      </td>
-     </tr>
-     <tr>
-      <td>
-       10
-      </td>
-      <td>
-       <a href="user/YoursTruly/challenges.html">
-        YoursTruly
-       </a>
-      </td>
-      <td>
-       1850
-      </td>
-     </tr>
-     <tr>
-      <td>
-       11
-      </td>
-      <td>
-       <a href="user/Shrenav/challenges.html">
-        Shrenav
-       </a>
-      </td>
-      <td>
-       1750
-      </td>
-     </tr>
-     <tr>
-      <td>
-       12
-      </td>
-      <td>
-       <a href="user/༒𝙰sʜᴡɪɴ༒/challenges.html">
-        ༒𝙰sʜᴡɪɴ༒
-       </a>
-      </td>
-      <td>
-       1750
-      </td>
-     </tr>
-     <tr>
-      <td>
-       13
-      </td>
-      <td>
-       <a href="user/luffy/challenges.html">
-        luffy
-       </a>
-      </td>
-      <td>
-       1650
-      </td>
-     </tr>
-     <tr>
-      <td>
-       14
-      </td>
-      <td>
-       <a href="user/MoonLight/challenges.html">
-        MoonLight
-       </a>
-      </td>
-      <td>
-       1500
-      </td>
-     </tr>
-     <tr>
-      <td>
-       15
-      </td>
-      <td>
-       <a href="user/Iconic_Whisper/challenges.html">
-        Iconic_Whisper
-       </a>
-      </td>
-      <td>
-       1200
-      </td>
-     </tr>
-     <tr>
-      <td>
-       16
-      </td>
-      <td>
-       <a href="user/Nargiza Maharjan/challenges.html">
-        Nargiza Maharjan
-       </a>
-      </td>
-      <td>
-       1050
-      </td>
-     </tr>
-     <tr>
-      <td>
-       17
-      </td>
-      <td>
-       <a href="user/Dhiru Piru/challenges.html">
-        Dhiru Piru
-       </a>
-      </td>
-      <td>
-       750
-      </td>
-     </tr>
-     <tr>
-      <td>
-       18
-      </td>
-      <td>
-       <a href="user/aayush/challenges.html">
-        aayush
-       </a>
-      </td>
-      <td>
-       550
-      </td>
-     </tr>
-     <tr>
-      <td>
-       19
-      </td>
-      <td>
-       <a href="user/Yodha/challenges.html">
-        Yodha
-       </a>
-      </td>
-      <td>
-       550
-      </td>
-     </tr>
-     <tr>
-      <td>
-       20
-      </td>
-      <td>
-       <a href="user/Clay69/challenges.html">
-        Clay69
-       </a>
-      </td>
-      <td>
-       550
-      </td>
-     </tr>
-     <tr>
-      <td>
-       21
-      </td>
-      <td>
-       <a href="user/GNU/challenges.html">
-        GNU
-       </a>
-      </td>
-      <td>
-       500
-      </td>
-     </tr>
-     <tr>
-      <td>
-       22
-      </td>
-      <td>
-       <a href="user/Anmuu/challenges.html">
-        Anmuu
-       </a>
-      </td>
-      <td>
-       500
-      </td>
-     </tr>
-     <tr>
-      <td>
-       23
-      </td>
-      <td>
-       <a href="user/thatguysbroke/challenges.html">
-        thatguysbroke
-       </a>
-      </td>
-      <td>
-       500
-      </td>
-     </tr>
-     <tr>
-      <td>
-       24
-      </td>
-      <td>
-       <a href="user/ahlai_3/challenges.html">
-        ahlai:3
-       </a>
-      </td>
-      <td>
-       350
-      </td>
-     </tr>
-     <tr>
-      <td>
-       25
-      </td>
-      <td>
-       <a href="user/Mandip/challenges.html">
-        Mandip
-       </a>
-      </td>
-      <td>
-       350
-      </td>
-     </tr>
-     <tr>
-      <td>
-       26
-      </td>
-      <td>
-       <a href="user/GUTS/challenges.html">
-        GUTS
-       </a>
-      </td>
-      <td>
-       300
-      </td>
-     </tr>
-     <tr>
-      <td>
-       27
-      </td>
-      <td>
-       <a href="user/Cosmic/challenges.html">
-        Cosmic
-       </a>
-      </td>
-      <td>
-       300
-      </td>
-     </tr>
-     <tr>
-      <td>
-       28
-      </td>
-      <td>
-       <a href="user/10y/challenges.html">
-        10y
-       </a>
-      </td>
-      <td>
-       250
-      </td>
-     </tr>
-     <tr>
-      <td>
-       29
-      </td>
-      <td>
-       <a href="user/X-night/challenges.html">
-        X-night
-       </a>
-      </td>
-      <td>
-       150
-      </td>
-     </tr>
-     <tr>
-      <td>
-       30
-      </td>
-      <td>
-       <a href="user/1336614365088055040/challenges.html">
-        1336614365088055040
-       </a>
-      </td>
-      <td>
-       150
-      </td>
-     </tr>
-     <tr>
-      <td>
-       31
-      </td>
-      <td>
-       <a href="user/golbeda/challenges.html">
-        golbeda
-       </a>
-      </td>
-      <td>
-       150
-      </td>
-     </tr>
-     <tr>
-      <td>
-       32
-      </td>
-      <td>
-       <a href="user/hello_you0/challenges.html">
-        hello_you0
-       </a>
-      </td>
-      <td>
-       150
-      </td>
-     </tr>
-     <tr>
-      <td>
-       33
-      </td>
-      <td>
-       <a href="user/MauLana Rhoades/challenges.html">
-        MauLana Rhoades
-       </a>
-      </td>
-      <td>
-       150
-      </td>
-     </tr>
-     <tr>
-      <td>
-       34
-      </td>
-      <td>
-       <a href="user/LUCKY_MJ_36457/challenges.html">
-        LUCKY_MJ_36457
-       </a>
-      </td>
-      <td>
-       150
-      </td>
-     </tr>
-     <tr>
-      <td>
-       35
-      </td>
-      <td>
-       <a href="user/wigglewiggle/challenges.html">
-        wigglewiggle
-       </a>
-      </td>
-      <td>
-       100
-      </td>
-     </tr>
-     <tr>
-      <td>
-       36
-      </td>
-      <td>
-       <a href="user/Adhyan Tamang/challenges.html">
-        Adhyan Tamang
-       </a>
-      </td>
-      <td>
-       100
-      </td>
-     </tr>
-     <tr>
-      <td>
-       37
-      </td>
-      <td>
-       <a href="user/404Ninjaaa/challenges.html">
-        404Ninjaaa
-       </a>
-      </td>
-      <td>
-       100
-      </td>
-     </tr>
-     <tr>
-      <td>
-       38
-      </td>
-      <td>
-       <a href="user/Ansees/challenges.html">
-        Ansees
-       </a>
-      </td>
-      <td>
-       100
-      </td>
-     </tr>
-     <tr>
-      <td>
-       39
-      </td>
-      <td>
-       <a href="user/Abyss_Walker/challenges.html">
-        Abyss_Walker
-       </a>
-      </td>
-      <td>
-       100
-      </td>
-     </tr>
-     <tr>
-      <td>
-       40
-      </td>
-      <td>
-       <a href="user/SAKUNA/challenges.html">
-        SAKUNA
-       </a>
-      </td>
-      <td>
-       100
-      </td>
-     </tr>
-     <tr>
-      <td>
-       41
-      </td>
-      <td>
-       <a href="user/प्रणय/challenges.html">
-        प्रणय
-       </a>
-      </td>
-      <td>
-       100
-      </td>
-     </tr>
-     <tr>
-      <td>
-       42
-      </td>
-      <td>
-       <a href="user/Tyrant/challenges.html">
-        Tyrant
-       </a>
-      </td>
-      <td>
-       100
-      </td>
-     </tr>
-     <tr>
-      <td>
-       43
-      </td>
-      <td>
-       <a href="user/Shrawan1234/challenges.html">
-        Shrawan1234
-       </a>
-      </td>
-      <td>
-       100
-      </td>
-     </tr>
-     <tr>
-      <td>
-       44
-      </td>
-      <td>
-       <a href="user/Yugal/challenges.html">
-        Yugal
-       </a>
-      </td>
-      <td>
-       100
-      </td>
-     </tr>
-     <tr>
-      <td>
-       45
-      </td>
-      <td>
-       <a href="user/krazy/challenges.html">
-        krazy
-       </a>
-      </td>
-      <td>
-       100
-      </td>
-     </tr>
-     <tr>
-      <td>
-       46
-      </td>
-      <td>
-       <a href="user/Hexaxe/challenges.html">
-        Hexaxe
-       </a>
-      </td>
-      <td>
-       50
-      </td>
-     </tr>
-     <tr>
-      <td>
-       47
-      </td>
-      <td>
-       <a href="user/Only Aayush/challenges.html">
-        Only Aayush
-       </a>
-      </td>
-      <td>
-       50
-      </td>
-     </tr>
-     <tr>
-      <td>
-       48
-      </td>
-      <td>
-       <a href="user/celebbbb/challenges.html">
-        celebbbb
-       </a>
-      </td>
-      <td>
-       50
-      </td>
-     </tr>
-    </tbody>
-   </table>
-  </div>
-  <!-- Footer -->
-  <footer>
-   <div class="footer-content">
-    <div class="footer-links">
-     <a class="footer-link" href="#">
-      Terms
-     </a>
-     <a class="footer-link" href="#">
-      Privacy
-     </a>
-     <a class="footer-link" href="#">
-      Contact
-     </a>
+   </nav>
+   <header class="page-header">
+    <div class="glitch-container">
+     <h1 class="glitch-small" data-text="Scoreboard">
+      Scoreboard
+     </h1>
     </div>
-    <p class="copyright">
-     © 2025 Attack On Hash Function. All rights reserved.
+    <div class="subtitle">
+     <span class="typewriter">
+      Who's leading the pack?
+     </span>
+    </div>
+   </header>
+   <section class="terminal leaderboard">
+    <div class="terminal-header">
+     <div class="terminal-buttons">
+      <span class="terminal-button red">
+      </span>
+      <span class="terminal-button yellow">
+      </span>
+      <span class="terminal-button green">
+      </span>
+     </div>
+     <div class="terminal-title">
+      terminal@aohf:~/scoreboard
+     </div>
+    </div>
+    <div class="terminal-content">
+     <div class="chart-container">
+      <canvas aria-label="Bar chart of the top 10 competitors by points" id="pointsChart" role="img">
+      </canvas>
+     </div>
+    </div>
+   </section>
+   <section class="terminal leaderboard">
+    <div class="terminal-header">
+     <div class="terminal-buttons">
+      <span class="terminal-button red">
+      </span>
+      <span class="terminal-button yellow">
+      </span>
+      <span class="terminal-button green">
+      </span>
+     </div>
+     <div class="terminal-title">
+      terminal@aohf:~/scoreboard
+     </div>
+    </div>
+    <div class="terminal-content">
+     <div class="table-wrap">
+      <table class="scoreboard">
+       <thead>
+        <tr>
+         <th>
+          Rank
+         </th>
+         <th>
+          User
+         </th>
+         <th>
+          Points
+         </th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr class="rank-1">
+         <td>
+          🥇
+         </td>
+         <td>
+          <a href="user/0xN1kU_H4X_!/challenges.html">
+           0xN1kU_H4X_!
+          </a>
+         </td>
+         <td>
+          9950
+         </td>
+        </tr>
+        <tr class="rank-2">
+         <td>
+          🥈
+         </td>
+         <td>
+          <a href="user/DargoTamber/challenges.html">
+           DargoTamber
+          </a>
+         </td>
+         <td>
+          6600
+         </td>
+        </tr>
+        <tr class="rank-3">
+         <td>
+          🥉
+         </td>
+         <td>
+          <a href="user/kharayo1x/challenges.html">
+           kharayo1x
+          </a>
+         </td>
+         <td>
+          4700
+         </td>
+        </tr>
+        <tr>
+         <td>
+          4
+         </td>
+         <td>
+          <a href="user/SHISHIR GHIMIRE/challenges.html">
+           SHISHIR GHIMIRE
+          </a>
+         </td>
+         <td>
+          4300
+         </td>
+        </tr>
+        <tr>
+         <td>
+          5
+         </td>
+         <td>
+          <a href="user/p0tato/challenges.html">
+           p0tato
+          </a>
+         </td>
+         <td>
+          4200
+         </td>
+        </tr>
+        <tr>
+         <td>
+          6
+         </td>
+         <td>
+          <a href="user/MrBender/challenges.html">
+           MrBender
+          </a>
+         </td>
+         <td>
+          3650
+         </td>
+        </tr>
+        <tr>
+         <td>
+          7
+         </td>
+         <td>
+          <a href="user/Oju D. Amatya/challenges.html">
+           Oju D. Amatya
+          </a>
+         </td>
+         <td>
+          2300
+         </td>
+        </tr>
+        <tr>
+         <td>
+          8
+         </td>
+         <td>
+          <a href="user/$sudo/challenges.html">
+           $sudo
+          </a>
+         </td>
+         <td>
+          2050
+         </td>
+        </tr>
+        <tr>
+         <td>
+          9
+         </td>
+         <td>
+          <a href="user/kinachaiyo/challenges.html">
+           kinachaiyo
+          </a>
+         </td>
+         <td>
+          1850
+         </td>
+        </tr>
+        <tr>
+         <td>
+          10
+         </td>
+         <td>
+          <a href="user/YoursTruly/challenges.html">
+           YoursTruly
+          </a>
+         </td>
+         <td>
+          1850
+         </td>
+        </tr>
+        <tr>
+         <td>
+          11
+         </td>
+         <td>
+          <a href="user/Shrenav/challenges.html">
+           Shrenav
+          </a>
+         </td>
+         <td>
+          1750
+         </td>
+        </tr>
+        <tr>
+         <td>
+          12
+         </td>
+         <td>
+          <a href="user/༒𝙰sʜᴡɪɴ༒/challenges.html">
+           ༒𝙰sʜᴡɪɴ༒
+          </a>
+         </td>
+         <td>
+          1750
+         </td>
+        </tr>
+        <tr>
+         <td>
+          13
+         </td>
+         <td>
+          <a href="user/luffy/challenges.html">
+           luffy
+          </a>
+         </td>
+         <td>
+          1650
+         </td>
+        </tr>
+        <tr>
+         <td>
+          14
+         </td>
+         <td>
+          <a href="user/MoonLight/challenges.html">
+           MoonLight
+          </a>
+         </td>
+         <td>
+          1500
+         </td>
+        </tr>
+        <tr>
+         <td>
+          15
+         </td>
+         <td>
+          <a href="user/Iconic_Whisper/challenges.html">
+           Iconic_Whisper
+          </a>
+         </td>
+         <td>
+          1200
+         </td>
+        </tr>
+        <tr>
+         <td>
+          16
+         </td>
+         <td>
+          <a href="user/Nargiza Maharjan/challenges.html">
+           Nargiza Maharjan
+          </a>
+         </td>
+         <td>
+          1050
+         </td>
+        </tr>
+        <tr>
+         <td>
+          17
+         </td>
+         <td>
+          <a href="user/Dhiru Piru/challenges.html">
+           Dhiru Piru
+          </a>
+         </td>
+         <td>
+          750
+         </td>
+        </tr>
+        <tr>
+         <td>
+          18
+         </td>
+         <td>
+          <a href="user/aayush/challenges.html">
+           aayush
+          </a>
+         </td>
+         <td>
+          550
+         </td>
+        </tr>
+        <tr>
+         <td>
+          19
+         </td>
+         <td>
+          <a href="user/Yodha/challenges.html">
+           Yodha
+          </a>
+         </td>
+         <td>
+          550
+         </td>
+        </tr>
+        <tr>
+         <td>
+          20
+         </td>
+         <td>
+          <a href="user/Clay69/challenges.html">
+           Clay69
+          </a>
+         </td>
+         <td>
+          550
+         </td>
+        </tr>
+        <tr>
+         <td>
+          21
+         </td>
+         <td>
+          <a href="user/GNU/challenges.html">
+           GNU
+          </a>
+         </td>
+         <td>
+          500
+         </td>
+        </tr>
+        <tr>
+         <td>
+          22
+         </td>
+         <td>
+          <a href="user/Anmuu/challenges.html">
+           Anmuu
+          </a>
+         </td>
+         <td>
+          500
+         </td>
+        </tr>
+        <tr>
+         <td>
+          23
+         </td>
+         <td>
+          <a href="user/thatguysbroke/challenges.html">
+           thatguysbroke
+          </a>
+         </td>
+         <td>
+          500
+         </td>
+        </tr>
+        <tr>
+         <td>
+          24
+         </td>
+         <td>
+          <a href="user/ahlai_3/challenges.html">
+           ahlai:3
+          </a>
+         </td>
+         <td>
+          350
+         </td>
+        </tr>
+        <tr>
+         <td>
+          25
+         </td>
+         <td>
+          <a href="user/Mandip/challenges.html">
+           Mandip
+          </a>
+         </td>
+         <td>
+          350
+         </td>
+        </tr>
+        <tr>
+         <td>
+          26
+         </td>
+         <td>
+          <a href="user/GUTS/challenges.html">
+           GUTS
+          </a>
+         </td>
+         <td>
+          300
+         </td>
+        </tr>
+        <tr>
+         <td>
+          27
+         </td>
+         <td>
+          <a href="user/Cosmic/challenges.html">
+           Cosmic
+          </a>
+         </td>
+         <td>
+          300
+         </td>
+        </tr>
+        <tr>
+         <td>
+          28
+         </td>
+         <td>
+          <a href="user/10y/challenges.html">
+           10y
+          </a>
+         </td>
+         <td>
+          250
+         </td>
+        </tr>
+        <tr>
+         <td>
+          29
+         </td>
+         <td>
+          <a href="user/X-night/challenges.html">
+           X-night
+          </a>
+         </td>
+         <td>
+          150
+         </td>
+        </tr>
+        <tr>
+         <td>
+          30
+         </td>
+         <td>
+          <a href="user/1336614365088055040/challenges.html">
+           1336614365088055040
+          </a>
+         </td>
+         <td>
+          150
+         </td>
+        </tr>
+        <tr>
+         <td>
+          31
+         </td>
+         <td>
+          <a href="user/golbeda/challenges.html">
+           golbeda
+          </a>
+         </td>
+         <td>
+          150
+         </td>
+        </tr>
+        <tr>
+         <td>
+          32
+         </td>
+         <td>
+          <a href="user/hello_you0/challenges.html">
+           hello_you0
+          </a>
+         </td>
+         <td>
+          150
+         </td>
+        </tr>
+        <tr>
+         <td>
+          33
+         </td>
+         <td>
+          <a href="user/MauLana Rhoades/challenges.html">
+           MauLana Rhoades
+          </a>
+         </td>
+         <td>
+          150
+         </td>
+        </tr>
+        <tr>
+         <td>
+          34
+         </td>
+         <td>
+          <a href="user/LUCKY_MJ_36457/challenges.html">
+           LUCKY_MJ_36457
+          </a>
+         </td>
+         <td>
+          150
+         </td>
+        </tr>
+        <tr>
+         <td>
+          35
+         </td>
+         <td>
+          <a href="user/wigglewiggle/challenges.html">
+           wigglewiggle
+          </a>
+         </td>
+         <td>
+          100
+         </td>
+        </tr>
+        <tr>
+         <td>
+          36
+         </td>
+         <td>
+          <a href="user/Adhyan Tamang/challenges.html">
+           Adhyan Tamang
+          </a>
+         </td>
+         <td>
+          100
+         </td>
+        </tr>
+        <tr>
+         <td>
+          37
+         </td>
+         <td>
+          <a href="user/404Ninjaaa/challenges.html">
+           404Ninjaaa
+          </a>
+         </td>
+         <td>
+          100
+         </td>
+        </tr>
+        <tr>
+         <td>
+          38
+         </td>
+         <td>
+          <a href="user/Ansees/challenges.html">
+           Ansees
+          </a>
+         </td>
+         <td>
+          100
+         </td>
+        </tr>
+        <tr>
+         <td>
+          39
+         </td>
+         <td>
+          <a href="user/Abyss_Walker/challenges.html">
+           Abyss_Walker
+          </a>
+         </td>
+         <td>
+          100
+         </td>
+        </tr>
+        <tr>
+         <td>
+          40
+         </td>
+         <td>
+          <a href="user/SAKUNA/challenges.html">
+           SAKUNA
+          </a>
+         </td>
+         <td>
+          100
+         </td>
+        </tr>
+        <tr>
+         <td>
+          41
+         </td>
+         <td>
+          <a href="user/प्रणय/challenges.html">
+           प्रणय
+          </a>
+         </td>
+         <td>
+          100
+         </td>
+        </tr>
+        <tr>
+         <td>
+          42
+         </td>
+         <td>
+          <a href="user/Tyrant/challenges.html">
+           Tyrant
+          </a>
+         </td>
+         <td>
+          100
+         </td>
+        </tr>
+        <tr>
+         <td>
+          43
+         </td>
+         <td>
+          <a href="user/Shrawan1234/challenges.html">
+           Shrawan1234
+          </a>
+         </td>
+         <td>
+          100
+         </td>
+        </tr>
+        <tr>
+         <td>
+          44
+         </td>
+         <td>
+          <a href="user/Yugal/challenges.html">
+           Yugal
+          </a>
+         </td>
+         <td>
+          100
+         </td>
+        </tr>
+        <tr>
+         <td>
+          45
+         </td>
+         <td>
+          <a href="user/krazy/challenges.html">
+           krazy
+          </a>
+         </td>
+         <td>
+          100
+         </td>
+        </tr>
+        <tr>
+         <td>
+          46
+         </td>
+         <td>
+          <a href="user/Hexaxe/challenges.html">
+           Hexaxe
+          </a>
+         </td>
+         <td>
+          50
+         </td>
+        </tr>
+        <tr>
+         <td>
+          47
+         </td>
+         <td>
+          <a href="user/Only Aayush/challenges.html">
+           Only Aayush
+          </a>
+         </td>
+         <td>
+          50
+         </td>
+        </tr>
+        <tr>
+         <td>
+          48
+         </td>
+         <td>
+          <a href="user/celebbbb/challenges.html">
+           celebbbb
+          </a>
+         </td>
+         <td>
+          50
+         </td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </section>
+   <footer class="footer">
+    <div class="binary-footer">
+     01000001 01001111 01001000 01000110
+    </div>
+    <p>
+     Attack On Hash Function © 2025 |
+     <i class="fas fa-shield-alt">
+     </i>
+     Secure. Challenge. Dominate.
+     <i class="fas fa-unlock">
+     </i>
     </p>
-   </div>
-  </footer>
+   </footer>
+  </div>
   <script>
    // Add rank classes to table rows
         document.addEventListener('DOMContentLoaded', function() {
@@ -1295,8 +862,8 @@
         // Enhanced Chart Configuration
         const ctx = document.getElementById('pointsChart').getContext('2d');
         const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, 'rgba(46, 125, 50, 0.8)');
-        gradient.addColorStop(1, 'rgba(139, 195, 74, 0.8)');
+        gradient.addColorStop(0, 'rgba(224, 224, 224, 0.75)');
+        gradient.addColorStop(1, 'rgba(224, 224, 224, 0.55)');
         
         const pointsChart = new Chart(ctx, {
             type: 'bar',
@@ -1306,11 +873,11 @@
                     label: 'Points',
                     data: [9950, 6600, 4700, 4300, 4200, 3650, 2300, 2050, 1850, 1850],
                     backgroundColor: gradient,
-                    borderColor: 'rgba(255, 255, 255, 0.3)',
+                    borderColor: 'rgba(224, 224, 224, 0.9)',
                     borderWidth: 1,
-                    borderRadius: 8,
-                    hoverBackgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    hoverBorderColor: 'rgba(255, 255, 255, 0.5)',
+                    borderRadius: 2,
+                    hoverBackgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    hoverBorderColor: '#ffffff',
                     hoverBorderWidth: 2
                 }]
             },
@@ -1330,14 +897,14 @@
                         display: false,
                     },
                     tooltip: {
-                        backgroundColor: 'rgba(18, 18, 18, 0.9)',
+                        backgroundColor: 'rgba(16, 16, 16, 0.95)',
                         titleColor: '#ffffff',
                         bodyColor: '#e2e2e2',
-                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        borderColor: 'rgba(42, 42, 42, 0.8)',
                         borderWidth: 1,
                         padding: 15,
-                        cornerRadius: 10,
-                        displayColors: true,
+                        cornerRadius: 4,
+                        displayColors: false,
                         boxPadding: 5,
                         callbacks: {
                             label: function(context) {
@@ -1346,12 +913,12 @@
                         }
                     },
                     title: {
-                        display: true,
+                        display: false,
                         text: 'Top 10 CTF Competitors (Points Distribution)',
                         color: '#ffffff',
                         font: {
                             size: 18,
-                            family: 'Montserrat',
+                            family: "'Courier New', monospace",
                             weight: '600'
                         },
                         padding: {
@@ -1366,9 +933,9 @@
                         min: getRoundedMin([9950, 6600, 4700, 4300, 4200, 3650, 2300, 2050, 1850, 1850]),
                         max: getRoundedMax([9950, 6600, 4700, 4300, 4200, 3650, 2300, 2050, 1850, 1850]),
                         ticks: {
-                            color: 'rgba(255, 255, 255, 0.7)',
+                            color: '#a0a0a0',
                             font: {
-                                family: 'Montserrat',
+                                family: "'Courier New', monospace",
                                 size: 12
                             },
                             padding: 10,
@@ -1378,7 +945,7 @@
                             }
                         },
                         grid: {
-                            color: 'rgba(255, 255, 255, 0.05)',
+                            color: 'rgba(255, 255, 255, 0.06)',
                             drawBorder: false
                         }
                     },
@@ -1388,9 +955,9 @@
                             drawBorder: false
                         },
                         ticks: {
-                            color: 'rgba(255, 255, 255, 0.7)',
+                            color: '#a0a0a0',
                             font: {
-                                family: 'Montserrat',
+                                family: "'Courier New', monospace",
                                 size: 12
                             },
                             padding: 5,

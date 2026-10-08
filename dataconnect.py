@@ -91,36 +91,6 @@ for i, tr in enumerate(tbody.find_all('tr')):
     elif i == 2:
         tr['class'] = tr.get('class', []) + ['rank-3']
 
-# Add CSS rule for table links
-style_tag = soup.find('style')
-if style_tag:
-    style_tag.append("""
-        table.scoreboard td a {
-            color: #e0e0e0;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        table.scoreboard td a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-    """)
-else:
-    print("Warning: Style tag not found in scoreboard.html. Adding new style tag.")
-    new_style = soup.new_tag('style')
-    new_style.string = """
-        table.scoreboard td a {
-            color: #e0e0e0;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        table.scoreboard td a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-    """
-    soup.head.append(new_style)
-
 # Update Chart.js data in the script tag
 script = soup.find('script', string=lambda text: text and 'pointsChart' in text)
 if script:
@@ -148,8 +118,8 @@ if script:
         // Enhanced Chart Configuration
         const ctx = document.getElementById('pointsChart').getContext('2d');
         const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, 'rgba(46, 125, 50, 0.8)');
-        gradient.addColorStop(1, 'rgba(139, 195, 74, 0.8)');
+        gradient.addColorStop(0, 'rgba(224, 224, 224, 0.75)');
+        gradient.addColorStop(1, 'rgba(224, 224, 224, 0.55)');
         
         const pointsChart = new Chart(ctx, {{
             type: 'bar',
@@ -159,11 +129,11 @@ if script:
                     label: 'Points',
                     data: {data},
                     backgroundColor: gradient,
-                    borderColor: 'rgba(255, 255, 255, 0.3)',
+                    borderColor: 'rgba(224, 224, 224, 0.9)',
                     borderWidth: 1,
-                    borderRadius: 8,
-                    hoverBackgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    hoverBorderColor: 'rgba(255, 255, 255, 0.5)',
+                    borderRadius: 2,
+                    hoverBackgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    hoverBorderColor: '#ffffff',
                     hoverBorderWidth: 2
                 }}]
             }},
@@ -183,14 +153,14 @@ if script:
                         display: false,
                     }},
                     tooltip: {{
-                        backgroundColor: 'rgba(18, 18, 18, 0.9)',
+                        backgroundColor: 'rgba(16, 16, 16, 0.95)',
                         titleColor: '#ffffff',
                         bodyColor: '#e2e2e2',
-                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        borderColor: 'rgba(42, 42, 42, 0.8)',
                         borderWidth: 1,
                         padding: 15,
-                        cornerRadius: 10,
-                        displayColors: true,
+                        cornerRadius: 4,
+                        displayColors: false,
                         boxPadding: 5,
                         callbacks: {{
                             label: function(context) {{
@@ -199,12 +169,12 @@ if script:
                         }}
                     }},
                     title: {{
-                        display: true,
+                        display: false,
                         text: 'Top 10 CTF Competitors (Points Distribution)',
                         color: '#ffffff',
                         font: {{
                             size: 18,
-                            family: 'Montserrat',
+                            family: "'Courier New', monospace",
                             weight: '600'
                         }},
                         padding: {{
@@ -219,9 +189,9 @@ if script:
                         min: getRoundedMin({data}),
                         max: getRoundedMax({data}),
                         ticks: {{
-                            color: 'rgba(255, 255, 255, 0.7)',
+                            color: '#a0a0a0',
                             font: {{
-                                family: 'Montserrat',
+                                family: "'Courier New', monospace",
                                 size: 12
                             }},
                             padding: 10,
@@ -231,7 +201,7 @@ if script:
                             }}
                         }},
                         grid: {{
-                            color: 'rgba(255, 255, 255, 0.05)',
+                            color: 'rgba(255, 255, 255, 0.06)',
                             drawBorder: false
                         }}
                     }},
@@ -241,9 +211,9 @@ if script:
                             drawBorder: false
                         }},
                         ticks: {{
-                            color: 'rgba(255, 255, 255, 0.7)',
+                            color: '#a0a0a0',
                             font: {{
-                                family: 'Montserrat',
+                                family: "'Courier New', monospace",
                                 size: 12
                             }},
                             padding: 5,
